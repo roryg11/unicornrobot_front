@@ -19,6 +19,20 @@ const UserActionCreators = {
     });
 
     WebAPIUtils.loadUser(userId);
+  },
+  signup: function(email, password, password_confirmation, first_name, last_name, username){
+    console.log("username in UserActionCreators is:" + username);
+    AppDispatcher.handleViewAction({
+      type:ActionTypes.SIGNUP_REQUEST,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+      first_name: first_name,
+      last_name: last_name,
+      username: username
+    });
+
+    WebAPIUtils.signup(email, password, password_confirmation, first_name, last_name, username);
   }
 }
 

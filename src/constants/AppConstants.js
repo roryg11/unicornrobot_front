@@ -16,6 +16,8 @@ const AppConstants = {
     // session
     LOGIN_REQUEST: null,
     LOGIN_RESPONSE: null,
+    SIGNUP_REQUEST: null,
+    SIGNUP_RESPONSE: null,
 
     // routes
     REDIRECT: null,

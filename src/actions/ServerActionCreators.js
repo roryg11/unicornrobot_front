@@ -1,10 +1,18 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AppConstants from '../constants/AppConstants';
-import WebAPIUtils from '../utils/WebAPIUtils';
+// import WebAPIUtils from '../utils/WebAPIUtils';
 
 const ActionTypes = AppConstants.ActionTypes;
 
 const ServerActionCreators = {
+  receiveSignup: function(json, errors){
+    console.log("in the ServerActionCreators receive signup")
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.SIGNUP_RESPONSE,
+      json: json,
+      errors: errors
+    })
+  },
   receiveLogin: function(json, errors){
     AppDispatcher.handleServerAction({
       type: ActionTypes.LOGIN_RESPONSE,

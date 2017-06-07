@@ -7,6 +7,7 @@ let errorMsgs = ["An error has a occurred. Please try again, or contact your adm
 let json;
 
 let _getErrors= function (res){
+  console.log(json);
   json = JSON.parse(res.text);
   if(json){
     if(json['errors']){
@@ -18,25 +19,28 @@ let _getErrors= function (res){
 }
 
 const WebAPIUtils = {
-  signup: function(email, username,password,passwordConfirmation){
+  signup: function(email, password, password_confirmation, first_name, last_name, username){
+    console.log("IN WebAPIUtils username:" + username);
     request.post(APIEndpoints.REGISTRATION)
     .send({
       user: {
         email: email,
-        username: username,
+        first_name: first_name,
+        last_name: last_name,
         password: password,
-        password_confirmation: passwordConfirmation
+        password_confirmation: password_confirmation,
+        username: username
       }
     })
     .set('Accept', 'application/json')
     .end((error, res) =>{
       if(res) {
         if(res.error){
-          var errorMsgs = _getErrors(res);
-          ServerActionCreators.receiveLogin(null, errorMsgs);
+          errorMsgs = _getErrors(res);
+          ServerActionCreators.receiveSignup(null, errorMsgs);
         } else {
           json = JSON.parse(res.text);
-          ServerActionCreators.receiveLogin(json, null);
+          ServerActionCreators.receiveSignup(json, null);
         }
       }
     });

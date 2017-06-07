@@ -36,14 +36,38 @@ class UsersList extends React.Component {
   render (){
     let users = this.state.users;
     let usersList = users.map(function(user){
-      return <li><p>{user.first_name}</p><p>{user.last_name}</p></li>
+      return(
+      <li className="ui grid">
+        <div className="column four wide">
+          <span>{user.first_name}</span> <span>{user.last_name}</span>
+        </div>
+        <div className="column four wide">
+          <span>{user.jump_from}</span> => <span>{user.jump_to}</span>
+        </div>
+        <div className="column four wide">
+          <span>Interests:  </span>
+          <span>{user.interests}</span>
+        </div>
+      </li>)
     })
 
     return (
 
-      <div>
+      <div className="container">
         <h1>Users List</h1>
+        <button>Add User</button>
         <ul>
+          <li className="ui grid">
+            <div className="column four wide">
+              <span>Name</span>
+            </div>
+            <div className="column four wide">
+              <span>Jumping from ___ to ___</span>
+            </div>
+            <div className="column four wide">
+              <span>Interests</span>
+            </div>
+          </li>
           {usersList}
         </ul>
       </div>
