@@ -4,6 +4,7 @@ import React from 'react';
 // import WebAPIUtils from '../../utils/WebAPIUtils';
 import UserStore from '../../stores/UserStore';
 import UserActionCreators from '../../actions/UserActionCreators';
+import User from './User';
 
 function getStateFromStores(){
   return {
@@ -37,39 +38,20 @@ class UsersList extends React.Component {
     let users = this.state.users;
     let usersList = users.map(function(user){
       return(
-      <li className="ui grid">
-        <div className="column four wide">
-          <span>{user.first_name}</span> <span>{user.last_name}</span>
-        </div>
-        <div className="column four wide">
-          <span>{user.jump_from}</span> => <span>{user.jump_to}</span>
-        </div>
-        <div className="column four wide">
-          <span>Interests:  </span>
-          <span>{user.interests}</span>
-        </div>
-      </li>)
+        <User user={user}/>
+      )
     })
 
     return (
 
-      <div className="container">
+      <div className="centered container">
         <h1>Users List</h1>
         <button>Add User</button>
-        <ul>
-          <li className="ui grid">
-            <div className="column four wide">
-              <span>Name</span>
+        <div className="ui one column centered grid">
+            <div className="column">
+              {usersList}
             </div>
-            <div className="column four wide">
-              <span>Jumping from ___ to ___</span>
-            </div>
-            <div className="column four wide">
-              <span>Interests</span>
-            </div>
-          </li>
-          {usersList}
-        </ul>
+        </div>
       </div>
     )
   }

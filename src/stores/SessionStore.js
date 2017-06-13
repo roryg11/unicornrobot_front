@@ -33,7 +33,6 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
     case ActionTypes.RECEIVE_SIGNUP_RESPONSE:
       break;
     case ActionTypes.RECEIVE_LOGIN_RESPONSE:
-    
   }
 });
 

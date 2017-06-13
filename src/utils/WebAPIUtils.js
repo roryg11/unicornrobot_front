@@ -61,6 +61,9 @@ const WebAPIUtils = {
       }
     })
   },
+  logout: function(){
+    
+  },
   loadUsers: function(){
     return request.get(APIEndpoints.USERS)
     .set('Authorization', 'application/json')

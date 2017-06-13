@@ -18,7 +18,7 @@ let UserStore = assign({}, EventEmitter.prototype, {
     this.on(CHANGE_EVENT, callback);
   },
   removeChangeListener: function(callback) {
-    this.removeChangeListener(CHANGE_EVENT, callback);
+    this.removeListener(CHANGE_EVENT, callback);
   },
   getAllUsers: function(){
     return _users;

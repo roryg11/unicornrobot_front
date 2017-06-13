@@ -7,10 +7,9 @@ class Users extends React.Component {
   render (){
     return(
       <div>
-        <h2> This is the Users page</h2>
         <Switch>
           <Route exact path='/users' component={UsersList}/>
-          <Route path='/users/:id' component={UserProfile}/>
+          <Route path='/users/:userId' component={UserProfile}/>
         </Switch>
       </div>
     )
