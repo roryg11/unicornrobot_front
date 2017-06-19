@@ -6,7 +6,6 @@ const ActionTypes = AppConstants.ActionTypes;
 
 const ServerActionCreators = {
   receiveSignup: function(json, errors){
-    console.log("in the ServerActionCreators receive signup")
     AppDispatcher.handleServerAction({
       type: ActionTypes.SIGNUP_RESPONSE,
       json: json,
@@ -28,10 +27,10 @@ const ServerActionCreators = {
   },
   receiveUser: function(json, errors){
     AppDispatcher.handleServerAction({
-      type:ActionTypes.RECEIVE_USER,
+      type:ActionTypes.CURRENT_USER_RESPONSE,
       json: json
     });
-  }
+  },
 };
 
 export default ServerActionCreators;

@@ -9,7 +9,7 @@ class Users extends React.Component {
       <div>
         <Switch>
           <Route exact path='/users' component={UsersList}/>
-          <Route path='/users/:userId' component={UserProfile}/>
+          <Route path='/users/profile' component={UserProfile}/>
         </Switch>
       </div>
     )

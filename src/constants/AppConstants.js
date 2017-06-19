@@ -6,7 +6,8 @@ const AppConstants = {
   APIEndpoints: {
     LOGIN:        APIRoot + '/v1/login',
     REGISTRATION: APIRoot + '/v1/users',
-    USERS:        APIRoot + '/v1/users' // might get some issues here
+    USERS:        APIRoot + '/v1/users', // might get some issues here
+    CURRENT_USER: APIRoot + '/v1/users/current_user'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -18,6 +19,9 @@ const AppConstants = {
     LOGIN_RESPONSE: null,
     SIGNUP_REQUEST: null,
     SIGNUP_RESPONSE: null,
+    CURRENT_USER_RESPONSE: null,
+    CURRENT_USER_REQUEST: null,
+    LOGOUT: null,
 
     // routes
     REDIRECT: null,

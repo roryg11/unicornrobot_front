@@ -1,41 +1,45 @@
 import React from 'react';
-import UserStore from '../../stores/UserStore';
-import UserActionCreators from '../../actions/UserActionCreators';
+import SessionStore from '../../stores/SessionStore';
+import SessionActionCreators from '../../actions/SessionActionCreators';
+import UserProfileRead from './UserProfileRead';
+
 
 
 function getStateFromStores(){
   return {
-    user: UserStore.getUser()
-  }
+    token: SessionStore.getToken(),
+    user: SessionStore.getCurrentUser()
+    }
 }
 
 class UserProfile extends React.Component {
     constructor (props){
       super(props);
       this.state = getStateFromStores();
-      this._onChange - this._onChange.bind(this);
+      this._onChange = this._onChange.bind(this);
     }
 
     componentDidMount(){
-        UserStore.addChangeListener(this._onChange);
-        UserActionCreators.loadUser();
+        SessionStore.addChangeListener(this._onChange);
+        SessionActionCreators.getCurrentUser();
     }
 
     componentWillUnmount(){
-      UserStore.removeChangeListener(this._onChange);
+      SessionStore.removeChangeListener(this._onChange);
     }
 
     _onChange(){
       this.setState({
-        user: UserStore.getUser()
-      })
+        token: SessionStore.getToken(),
+        user: SessionStore.getCurrentUser()
+      });
     }
 
     render (){
       return(
         <div>
           <div>User Profile Page</div>
-          <div>{this.state.user}</div>
+          <UserProfileRead user={this.state.user}/>
         </div>
       );
     }

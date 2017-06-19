@@ -61,9 +61,6 @@ const WebAPIUtils = {
       }
     })
   },
-  logout: function(){
-    
-  },
   loadUsers: function(){
     return request.get(APIEndpoints.USERS)
     .set('Authorization', 'application/json')
@@ -85,6 +82,17 @@ const WebAPIUtils = {
         ServerActionCreators.receiveUser(json);
       }
     })
+  },
+  getCurrentUser: function(){
+    request.get(APIEndpoints.CURRENT_USER)
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end((error, res)=>{
+        if(res){
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveUser(json);
+        }
+      });
   }
 }
 

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 class Header extends React.Component {
   render() {
     return (
-      <div className="ui secondary pointing menu">
+      <div className="ui stackable secondary pointing menu">
         <Link to="/users" className="item">User Directory</Link>
-        <Link to="/users/:id" className="item">Profile</Link>
+        <Link to="/users/profile" className="item">Profile</Link>
         <a className="item">Events</a>
         <a className="item">Blog</a>
         <div className="right menu">
