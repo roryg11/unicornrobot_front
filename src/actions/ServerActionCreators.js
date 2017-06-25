@@ -19,6 +19,13 @@ const ServerActionCreators = {
       errors: errors
     });
   },
+  receiveLogout: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.LOGOUT_RESPONSE,
+      json: json,
+      errors: errors
+    });
+  },
   receiveUsers: function(json, errors){
     AppDispatcher.handleServerAction({
       type: ActionTypes.RECEIVE_USERS,

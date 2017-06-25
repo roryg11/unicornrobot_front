@@ -93,6 +93,17 @@ const WebAPIUtils = {
           ServerActionCreators.receiveUser(json);
         }
       });
+  },
+  logout: function(){
+    request.delete(APIEndpoints.LOGOUT)
+    .set('Accept', 'application/json')
+    .set('Authorization', sessionStorage.getItem('accessToken'))
+    .end((error, res) => {
+      if(res){
+        json = JSON.parse(res.text);
+        ServerActionCreators.receiveLogout(json);
+      }
+    });
   }
 }
 

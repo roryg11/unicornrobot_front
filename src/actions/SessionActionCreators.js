@@ -33,6 +33,7 @@ const SessionActionCreators = {
     AppDispatcher.handleViewAction({
       type: ActionTypes.LOGOUT
     });
+    WebAPIUtils.logout();
   }
 }
 

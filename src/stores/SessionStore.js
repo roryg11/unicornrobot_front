@@ -57,9 +57,10 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
       }
       SessionStore.emitChange();
       break;
-    case ActionTypes.LOGOUT:
+    case ActionTypes.LOGOUT_RESPONSE:
       _accessToken = null;
       _email = null;
+      _currentUser = null;
       sessionStorage.removeItem('accessToken');
       sessionStorage.removeItem('email');
       SessionStore.emitChange();
