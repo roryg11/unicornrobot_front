@@ -6,7 +6,8 @@ import SessionActionCreators from '../actions/SessionActionCreators';
 function getStateFromStores (){
   return {
     token: SessionStore.getToken(),
-    user: SessionStore.getCurrentUser()
+    user: SessionStore.getCurrentUser(),
+    errors: SessionStore.getErrors()
   }
 }
 
@@ -30,7 +31,8 @@ class Header extends React.Component {
   _onChange(){
     this.setState({
       token: SessionStore.getToken(),
-      user: SessionStore.getCurrentUser()
+      user: SessionStore.getCurrentUser(),
+      errors: SessionStore.getErrors()
     })
   }
 
@@ -40,24 +42,21 @@ class Header extends React.Component {
   }
 
   render() {
-    let sessionStateLink;
+    let rightMenu;
+
     if(!this.state.user){
       console.log("no session/user");
-      sessionStateLink = <Link to="/login" className="ui item">Login</Link>
+      rightMenu = <div className="right menu"><Link to="/login" className="ui item">Login</Link><Link to="/signup" className="ui item">Signup</Link></div>;
     } else {
-      console.log("user/session found")
-      sessionStateLink = <a className="ui item" onClick={this._handleLogout}>Logout</a>
+      console.log(this.state.user);
+      rightMenu = <div className="right menu"><Link to="/users/profile" className="item">Profile</Link> <a className="ui item" onClick={this._handleLogout}>Logout</a></div>
     }
     return (
       <div className="ui stackable secondary pointing menu">
         <Link to="/users" className="item">User Directory</Link>
-        <Link to="/users/profile" className="item">Profile</Link>
         <a className="item">Events</a>
         <a className="item">Blog</a>
-        <div className="right menu">
-          <Link to="/signup" className="ui item">Signup</Link>
-          {sessionStateLink}
-        </div>
+        {rightMenu}
       </div>
 
     );

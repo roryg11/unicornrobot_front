@@ -38,7 +38,9 @@ class UsersList extends React.Component {
     let users = this.state.users;
     let usersList = users.map(function(user){
       return(
-        <User user={user}/>
+        <div className="ui container" key={user.id}>
+          <User user={user}/>
+        </div>
       )
     })
 

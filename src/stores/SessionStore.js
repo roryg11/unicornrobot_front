@@ -46,14 +46,20 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
         sessionStorage.setItem('accessToken', _accessToken);
         sessionStorage.setItem('email', _email);
       }
-      if(action.errors){
-        _errors = action.errors;
+      if(action.error){
+        _errors = action.error;
       }
       SessionStore.emitChange();
       break;
     case ActionTypes.CURRENT_USER_RESPONSE:
       if(action.json){
         _currentUser = action.json;
+      }
+
+      console.log(action);
+      if(action.error){
+
+        _errors = action.error
       }
       SessionStore.emitChange();
       break;

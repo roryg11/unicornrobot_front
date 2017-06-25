@@ -7,20 +7,18 @@ let errorMsgs = ["An error has a occurred. Please try again, or contact your adm
 let json;
 
 let _getErrors= function (res){
-  console.log(json);
   json = JSON.parse(res.text);
   if(json){
-    if(json['errors']){
-      errorMsgs = json['errors'];
-    } else if (json['error']){
-      errorMsgs = [json['error']];
+    if(json.errors){
+      errorMsgs = json.errors;
+    } else if (json.error){
+      errorMsgs = [json.error];
     }
   }
 }
 
 const WebAPIUtils = {
   signup: function(email, password, password_confirmation, first_name, last_name, username){
-    console.log("IN WebAPIUtils username:" + username);
     request.post(APIEndpoints.REGISTRATION)
     .send({
       user: {
@@ -52,7 +50,7 @@ const WebAPIUtils = {
     .end((error, res)=>{
       if(res){
         if(res.error){
-          var errorMsgs = _getErrors(res);
+          _getErrors(res);
           ServerActionCreators.receiveLogin(null, errorMsgs);
         } else {
           json = JSON.parse(res.text);
@@ -89,8 +87,14 @@ const WebAPIUtils = {
       .set('Authorization', sessionStorage.getItem('accessToken'))
       .end((error, res)=>{
         if(res){
-          json = JSON.parse(res.text);
-          ServerActionCreators.receiveUser(json);
+          if(res.error){
+            _getErrors(res);
+            console.log(errorMsgs);
+            ServerActionCreators.receiveUser(null, errorMsgs);
+          } else {
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveUser(json);
+          }
         }
       });
   },

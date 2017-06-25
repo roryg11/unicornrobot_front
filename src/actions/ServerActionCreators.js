@@ -29,13 +29,15 @@ const ServerActionCreators = {
   receiveUsers: function(json, errors){
     AppDispatcher.handleServerAction({
       type: ActionTypes.RECEIVE_USERS,
-      json: json
+      json: json,
+      errors: errors
     });
   },
   receiveUser: function(json, errors){
     AppDispatcher.handleServerAction({
       type:ActionTypes.CURRENT_USER_RESPONSE,
-      json: json
+      json: json,
+      errors: errors
     });
   },
 };
