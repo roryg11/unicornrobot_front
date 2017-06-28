@@ -2,13 +2,15 @@ import React from 'react';
 import SessionStore from '../../stores/SessionStore';
 import SessionActionCreators from '../../actions/SessionActionCreators';
 import UserProfileRead from './UserProfileRead';
+import UserProfileUpdate from './UserProfileUpdate';
 
 
 
 function getStateFromStores(){
   return {
     token: SessionStore.getToken(),
-    user: SessionStore.getCurrentUser()
+    user: SessionStore.getCurrentUser(),
+    showEditForm: false
     }
 }
 
@@ -17,6 +19,7 @@ class UserProfile extends React.Component {
       super(props);
       this.state = getStateFromStores();
       this._onChange = this._onChange.bind(this);
+      this._toggleEdit = this._toggleEdit.bind(this);
     }
 
     componentDidMount(){
@@ -35,11 +38,23 @@ class UserProfile extends React.Component {
       });
     }
 
+    _toggleEdit(){
+      console.log("IN THE TOGGLE EDIT FORM");
+      this.setState({showEditForm: !this.showEditForm});
+    }
+
     render (){
+      let profile;
+      if( this.state.showEditForm ){
+        profile= <UserProfileUpdate user={this.state.user}/>
+      } else {
+        profile = <UserProfileRead user={this.state.user}/>
+      }
       return(
         <div>
           <div>User Profile Page</div>
-          <UserProfileRead user={this.state.user}/>
+          <button className="ui button" onClick={this._toggleEdit}>Edit</button>
+          {profile}
         </div>
       );
     }

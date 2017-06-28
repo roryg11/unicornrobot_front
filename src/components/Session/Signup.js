@@ -38,7 +38,7 @@ class Signup extends React.Component {
 
   render (){
     return (
-      <div className="container">
+      <div className="ui container">
         <form className="ui form">
           <div className="fields">
             <div className="field">

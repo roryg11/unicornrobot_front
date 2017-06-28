@@ -55,8 +55,6 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
       if(action.json){
         _currentUser = action.json;
       }
-
-      console.log(action);
       if(action.error){
 
         _errors = action.error

@@ -21,7 +21,6 @@ const UserActionCreators = {
     WebAPIUtils.loadUser(userId);
   },
   signup: function(email, password, password_confirmation, first_name, last_name, username){
-    console.log("username in UserActionCreators is:" + username);
     AppDispatcher.handleViewAction({
       type:ActionTypes.SIGNUP_REQUEST,
       email: email,
@@ -33,6 +32,20 @@ const UserActionCreators = {
     });
 
     WebAPIUtils.signup(email, password, password_confirmation, first_name, last_name, username);
+  },
+  updateUser: function(id, user){
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.UPDATE_USER_REQUEST,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      username: user.username,
+      bio: user.bio,
+      jump_from: user.jump_from,
+      jump_to: user.jump_to
+    });
+
+    WebAPIUtils.updateUser(id, user);
   }
 }
 

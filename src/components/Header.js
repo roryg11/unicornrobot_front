@@ -45,10 +45,8 @@ class Header extends React.Component {
     let rightMenu;
 
     if(!this.state.user){
-      console.log("no session/user");
       rightMenu = <div className="right menu"><Link to="/login" className="ui item">Login</Link><Link to="/signup" className="ui item">Signup</Link></div>;
     } else {
-      console.log(this.state.user);
       rightMenu = <div className="right menu"><Link to="/users/profile" className="item">Profile</Link> <a className="ui item" onClick={this._handleLogout}>Logout</a></div>
     }
     return (

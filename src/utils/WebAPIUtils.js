@@ -81,6 +81,18 @@ const WebAPIUtils = {
       }
     })
   },
+  updateUser: function(id, user){
+    request.put(APIEndpoints.USERS + '/' + id)
+    .send({user: user})
+    .set('Accept', 'application/json')
+    .set('Authorization', sessionStorage.getItem('accessToken'))
+    .end((error, res) => {
+      if(res){
+        json = JSON.parse(res.text);
+        ServerActionCreators.receiveUser(json);
+      }
+    });
+  },
   getCurrentUser: function(){
     request.get(APIEndpoints.CURRENT_USER)
       .set('Accept', 'application/json')
@@ -89,7 +101,6 @@ const WebAPIUtils = {
         if(res){
           if(res.error){
             _getErrors(res);
-            console.log(errorMsgs);
             ServerActionCreators.receiveUser(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
