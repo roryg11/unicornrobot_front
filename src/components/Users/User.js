@@ -8,24 +8,22 @@ class User extends React.Component {
   // }
 
   render (){
-    return(<div className="ui centered fluid card">
-            <div className="content">
-              <div className="header">
-                <span>{this.props.user.first_name} </span>
-                <span>{this.props.user.last_name}</span>
-              </div>
-              <div className="meta">
-                <span>{this.props.user.jump_from}</span> => <span>{this.props.user.jump_to}</span>
-              </div>
-              <div className="description">
-                <span>Interests:  </span>
-                <span>{this.props.user.interests}</span>
-              </div>
-            </div>
-            <div className="extra content">
+    return(<tr>
+            <td>
+              <span>{this.props.user.first_name}</span>
+              <span>{this.props.user.last_name}</span>
+            </td>
+            <td>
+              <span>{this.props.user.jump_from}</span> => <span>{this.props.user.jump_to}</span>
+            </td>
+            <td>
+              <span>Interests:  </span>
+              <span>{this.props.user.interests}</span>
+            </td>
+            <td>
               <span>Contact Me:</span> <span>{this.props.user.email}</span>
-            </div>
-      </div>)
+            </td>
+      </tr>)
   }
 }
 

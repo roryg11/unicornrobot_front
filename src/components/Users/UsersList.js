@@ -38,22 +38,28 @@ class UsersList extends React.Component {
     let users = this.state.users;
     let usersList = users.map(function(user){
       return(
-        <div className="ui container" key={user.id}>
+        <tbody className="" key={user.id}>
           <User user={user}/>
-        </div>
+        </tbody>
       )
-    })
+    });
 
     return (
 
-      <div className="centered container">
+      <div className="ui centered">
         <h1>Users List</h1>
         <button>Add User</button>
-        <div className="ui one column centered grid">
-            <div className="column">
-              {usersList}
-            </div>
-        </div>
+        <table className="ui celled table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Jump</th>
+              <th>Interests</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+          {usersList}
+        </table>
       </div>
     )
   }
