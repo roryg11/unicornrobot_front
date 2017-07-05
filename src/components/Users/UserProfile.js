@@ -5,7 +5,6 @@ import UserProfileRead from './UserProfileRead';
 import UserProfileUpdate from './UserProfileUpdate';
 
 
-
 function getStateFromStores(){
   return {
     token: SessionStore.getToken(),

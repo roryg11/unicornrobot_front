@@ -49,7 +49,7 @@ class UsersList extends React.Component {
       <div className="ui centered">
         <h1>Users List</h1>
         <button>Add User</button>
-        <table className="ui celled table">
+        <table className="ui celled stackable table">
           <thead>
             <tr>
               <th>Name</th>

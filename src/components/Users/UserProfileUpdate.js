@@ -2,6 +2,8 @@ import React from 'react';
 // import SessionStore from '../../stores/SessionStore';
 // import SessionActionCreators from '../../actions/SessionActionCreators';
 import UserActionCreators from '../../actions/UserActionCreators';
+import Interests from '../../constants/Interests';
+
 
 class UserProfileUpdate extends React.Component {
   constructor(props){
@@ -38,12 +40,17 @@ class UserProfileUpdate extends React.Component {
       bio: this.state.bio,
       jump_from: this.state.jump_from,
       jump_to: this.state.jump_to,
+      interests: this.state.interests
     }
     UserActionCreators.updateUser(this.props.user.id, user);
   }
 
   render (){
-    return (<div className="container">
+    const optionsList = Object.keys(Interests).reduce(function(previous, current){
+      return 
+    }, {})
+
+    return (<div className="ui centered container">
       <form className="ui form">
         <div className="fields">
           <div className="field">
@@ -63,11 +70,9 @@ class UserProfileUpdate extends React.Component {
             <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this._handleInputChange}/>
           </div>
         </div>
-        <div className="fields">
-          <div className="field">
-            <label>Bio</label>
-            <textarea name="bio" placeholder="Tell us a little bit about yourself" value={this.state.bio} onChange={this._handleInputChange}/>
-          </div>
+        <div className="field">
+          <label>Bio</label>
+          <textarea name="bio" placeholder="Tell us a little bit about yourself" value={this.state.bio} onChange={this._handleInputChange}/>
         </div>
         <div className="fields">
           <div className="field">
@@ -81,6 +86,7 @@ class UserProfileUpdate extends React.Component {
         </div>
         <div className="fields">
           <label>What are your interests?</label>
+
         </div>
         <button className="ui button" onClick={this._handleSubmit}>Submit</button>
       </form>

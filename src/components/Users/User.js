@@ -10,7 +10,7 @@ class User extends React.Component {
   render (){
     return(<tr>
             <td>
-              <span>{this.props.user.first_name}</span>
+              <span>{this.props.user.first_name} </span>
               <span>{this.props.user.last_name}</span>
             </td>
             <td>
