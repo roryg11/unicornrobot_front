@@ -2,6 +2,7 @@ import React from 'react';
 // import SessionStore from '../../stores/SessionStore';
 // import SessionActionCreators from '../../actions/SessionActionCreators';
 import UserActionCreators from '../../actions/UserActionCreators';
+import InterestActionCreators from '../../actions/InterestActionCreators';
 import Interests from '../../constants/Interests';
 
 
@@ -15,10 +16,15 @@ class UserProfileUpdate extends React.Component {
       email: this.props.user.email,
       bio: this.props.user.bio || " ",
       jump_from: this.props.user.jump_from || " ",
-      jump_to: this.props.user.jump_to || " "
+      jump_to: this.props.user.jump_to || " ",
+      interests: this.props.user.interests || [],
+      newInterests: []
     }
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
+    this._handleSelectValueChange = this._handleSelectValueChange.bind(this);
+    this._handleSubmitInterestsChange = this._handleSubmitInterestsChange.bind(this);
+    this._deleteInterest = this._deleteInterest.bind(this);
   }
 
   _handleInputChange(e){
@@ -39,16 +45,47 @@ class UserProfileUpdate extends React.Component {
       last_name: this.state.last_name,
       bio: this.state.bio,
       jump_from: this.state.jump_from,
-      jump_to: this.state.jump_to,
-      interests: this.state.interests
+      jump_to: this.state.jump_to
     }
-    UserActionCreators.updateUser(this.props.user.id, user);
+    UserActionCreators.updateUser(this.props.user.id, user, this.state.interests);
+  }
+
+  _handleSelectValueChange(e){
+    let unsavedInterests = this.state.newInterests;
+    let savedInterests = this.state.interests;
+    let newInterest = {
+      user_id: this.props.user.id,
+      description: e.target.value
+    };
+    unsavedInterests.push(newInterest);
+    this.setState({newInterests: unsavedInterests});
+  }
+
+  _handleSubmitInterestsChange(e){
+    e.preventDefault();
+    for(let i=0; i < this.state.newInterests.length; i ++){
+      InterestActionCreators.createInterest(this.state.newInterests[i]);
+    }
+  }
+
+  _deleteInterest(e){
+    e.preventDefault();
+    return;
   }
 
   render (){
-    const optionsList = Object.keys(Interests).reduce(function(previous, current){
-      return 
-    }, {})
+    let optionsArr = Object.keys(Interests);
+    let optionsList = optionsArr.map(function(key){
+      return <option value={Interests[key]}>{Interests[key]}</option>
+    });
+
+    optionsList.unshift(<option value="">Select an interest</option>)
+    let currentInterests = this.state.interests.map(function(interest){
+      return <p key={interest.id}>{interest.description}</p>;
+    });
+    let newInterests = this.state.newInterests.map(function(interest){
+      return <p key={interest.id}>{interest.description}</p>;
+    });
 
     return (<div className="ui centered container">
       <form className="ui form">
@@ -86,7 +123,12 @@ class UserProfileUpdate extends React.Component {
         </div>
         <div className="fields">
           <label>What are your interests?</label>
-
+          {currentInterests}
+          {newInterests}
+          <select value="" onChange={this._handleSelectValueChange}>
+            {optionsList}
+          </select>
+          <button className="ui button" onClick={this._handleSubmitInterestsChange}>Update Interests</button>
         </div>
         <button className="ui button" onClick={this._handleSubmit}>Submit</button>
       </form>

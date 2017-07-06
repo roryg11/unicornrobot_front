@@ -8,7 +8,8 @@ const AppConstants = {
     REGISTRATION: APIRoot + '/v1/users',
     USERS:        APIRoot + '/v1/users', // might get some issues here
     CURRENT_USER: APIRoot + '/v1/users/current_user',
-    LOGOUT:       APIRoot + '/v1/logout'
+    LOGOUT:       APIRoot + '/v1/logout',
+    INTEREST:    APIRoot + '/v1/interests'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -33,7 +34,10 @@ const AppConstants = {
     LOAD_USER: null,
     RECEIVE_USER: null,
     CREATE_USER: null,
-    RECEIVE_CREATED_USER: null
+    RECEIVE_CREATED_USER: null,
+
+    CREATE_INTEREST: null,
+    RECEIVE_INTEREST: null
   })
 }
 

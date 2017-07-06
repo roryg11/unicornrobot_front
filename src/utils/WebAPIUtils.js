@@ -88,8 +88,21 @@ const WebAPIUtils = {
     .set('Authorization', sessionStorage.getItem('accessToken'))
     .end((error, res) => {
       if(res){
+        console.log(res);
         json = JSON.parse(res.text);
         ServerActionCreators.receiveUser(json);
+      }
+    });
+  },
+  createInterest: function(interest){
+    request.post(APIEndpoints.INTEREST)
+    .send({interest: interest})
+    .set('Accept', 'application/json')
+    .set('Authorization', sessionStorage.getItem('accessToken'))
+    .end((error, res) => {
+      if(res){
+        json = JSON.parse(res.text);
+        ServerActionCreators.receiveInterest(json);
       }
     });
   },

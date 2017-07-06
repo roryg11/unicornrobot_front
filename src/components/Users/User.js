@@ -8,6 +8,13 @@ class User extends React.Component {
   // }
 
   render (){
+    let userInterests = <span>None Listed</span>;
+    if(this.props.user.interests.length){
+      userInterests = this.props.user.interests.map(function(interest){
+        return <li key={interest.id}>{interest.description} </li>;
+      });
+    }
+
     return(<tr>
             <td>
               <span>{this.props.user.first_name} </span>
@@ -18,7 +25,9 @@ class User extends React.Component {
             </td>
             <td>
               <span>Interests:  </span>
-              <span>{this.props.user.interests}</span>
+              <ul>
+                {userInterests}
+              </ul>
             </td>
             <td>
               <span>Contact Me:</span> <span>{this.props.user.email}</span>

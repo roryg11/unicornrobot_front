@@ -40,6 +40,13 @@ const ServerActionCreators = {
       errors: errors
     });
   },
+  receiveInterest: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_INTEREST,
+      json: json,
+      errors: errors
+    });
+  }
 };
 
 export default ServerActionCreators;

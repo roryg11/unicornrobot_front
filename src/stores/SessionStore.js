@@ -53,7 +53,7 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
       break;
     case ActionTypes.CURRENT_USER_RESPONSE:
       if(action.json){
-        _currentUser = action.json;
+        _currentUser = action.json.user;
       }
       if(action.error){
 

@@ -22,8 +22,8 @@ class UserProfile extends React.Component {
     }
 
     componentDidMount(){
-        SessionStore.addChangeListener(this._onChange);
-        SessionActionCreators.getCurrentUser();
+      SessionStore.addChangeListener(this._onChange);
+      SessionActionCreators.getCurrentUser();
     }
 
     componentWillUnmount(){
