@@ -52,7 +52,6 @@ class UserProfileUpdate extends React.Component {
 
   _handleSelectValueChange(e){
     let unsavedInterests = this.state.newInterests;
-    let savedInterests = this.state.interests;
     let newInterest = {
       user_id: this.props.user.id,
       description: e.target.value

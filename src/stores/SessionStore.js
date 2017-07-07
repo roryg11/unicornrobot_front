@@ -35,8 +35,6 @@ let SessionStore = assign({}, EventEmitter.prototype, {
 SessionStore.dispatchToken = AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.type){
-    case ActionTypes.SIGNUP_RESPONSE:
-      break;
     case ActionTypes.LOGIN_RESPONSE:
       if(action.json && action.json.access_token){
         _accessToken = action.json.access_token;

@@ -7,6 +7,7 @@ let errorMsgs = ["An error has a occurred. Please try again, or contact your adm
 let json;
 
 let _getErrors= function (res){
+  let errorMsgs = [];
   json = JSON.parse(res.text);
   if(json){
     if(json.errors){
@@ -15,6 +16,7 @@ let _getErrors= function (res){
       errorMsgs = [json.error];
     }
   }
+  return errorMsgs
 }
 
 const WebAPIUtils = {
@@ -33,6 +35,7 @@ const WebAPIUtils = {
     .set('Accept', 'application/json')
     .end((error, res) =>{
       if(res) {
+
         if(res.error){
           errorMsgs = _getErrors(res);
           ServerActionCreators.receiveSignup(null, errorMsgs);

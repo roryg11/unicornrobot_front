@@ -7,10 +7,10 @@ const ActionTypes = AppConstants.ActionTypes;
 const ServerActionCreators = {
   receiveSignup: function(json, errors){
     AppDispatcher.handleServerAction({
-      type: ActionTypes.SIGNUP_RESPONSE,
+      type: ActionTypes.RECEIVE_CREATED_USER,
       json: json,
       errors: errors
-    })
+    });
   },
   receiveLogin: function(json, errors){
     AppDispatcher.handleServerAction({

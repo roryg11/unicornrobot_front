@@ -1,7 +1,13 @@
 import React from 'react';
-// import UserStore from '../../stores/UserStore';
+import UserStore from '../../stores/UserStore';
 import UserActionCreators from '../../actions/UserActionCreators';
-
+// import SessionStore from '../../stores/SessionStore';
+function uniq(a) {
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+}
 class Signup extends React.Component {
   constructor (){
     super();
@@ -14,11 +20,27 @@ class Signup extends React.Component {
       password_confirmation: "",
       bio: "",
       jump_from: "",
-      jump_to: ""
+      jump_to: "",
+      errors: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this._onSignupChange = this._onSignupChange.bind(this);
 
+  }
+
+  componentDidMount (){
+    UserStore.addChangeListener(this._onSignupChange);
+    this.setState({errors:UserStore.getErrors()});
+  }
+
+  componentWillUnmount (){
+    UserStore.removeChangeListener(this._onSignupChange);
+  }
+
+  _onSignupChange (){
+    let errors = UserStore.getErrors();
+    this.setState({errors: errors});
   }
 
   handleInputChange(e){
@@ -32,13 +54,35 @@ class Signup extends React.Component {
 
   handleSubmit (e){
     e.preventDefault();
-    UserActionCreators.signup(this.state.email, this.state.password, this.state.password_confirmation, this.state.first_name, this.state.last_name, this.state.username);
+    if(this.state.password !== this.state.password_confirmation){
+      this.setState({errors: ["passwords do not match"]});
+      return;
+    }
+
+    UserActionCreators.signup(
+      this.state.email,
+      this.state.password,
+      this.state.password_confirmation,
+      this.state.first_name,
+      this.state.last_name,
+      this.state.username);
+
   }
 
 
   render (){
+    let errorMessages;
+    if(this.state.errors.length){
+      errorMessages = this.state.errors.map(function(errorMsg, index){
+        return(<div className="ui danger message">
+          <span key={index}>{errorMsg} </span>
+        </div>);
+      });
+    }
     return (
-      <div className="ui container">
+      <div className="ui container content">
+        <h1 className="ui header">Sign up with When to Jump</h1>
+        {errorMessages}
         <form className="ui form">
           <div className="fields">
             <div className="field">
