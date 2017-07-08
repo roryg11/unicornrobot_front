@@ -30,7 +30,10 @@ class Login extends React.Component {
   }
 
   _onChange(){
-    this.setState({errors: SessionStore.getErrors()});
+    this.setState({
+      errors: SessionStore.getErrors(),
+      
+    });
   }
 
   handleInputChange(e){
@@ -49,17 +52,12 @@ class Login extends React.Component {
 
   render (){
     return (
-      <div className="container">
-        <form className="ui form">
-          <div className="fields">
-            <div className="field">
-              <label>Username</label>
-              <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange}/>
-            </div>
-            <div className="field">
-              <label>Email</label>
-              <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
-            </div>
+      <div className="ui container">
+        <h2 className="ui horizontal divider header">Login</h2>
+        <form className="ui form segment">
+          <div className="field">
+            <label>Email</label>
+            <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
           </div>
           <div className="field">
             <label>Password</label>

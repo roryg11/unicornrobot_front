@@ -38,7 +38,6 @@ class UserProfile extends React.Component {
     }
 
     _toggleEdit(){
-      console.log("IN THE TOGGLE EDIT FORM");
       this.setState({showEditForm: !this.showEditForm});
     }
 

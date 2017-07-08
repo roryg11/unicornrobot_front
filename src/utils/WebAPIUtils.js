@@ -20,7 +20,7 @@ let _getErrors= function (res){
 }
 
 const WebAPIUtils = {
-  signup: function(email, password, password_confirmation, first_name, last_name, username){
+  signup: function(email, password, password_confirmation, first_name, last_name){
     request.post(APIEndpoints.REGISTRATION)
     .send({
       user: {
@@ -28,8 +28,7 @@ const WebAPIUtils = {
         first_name: first_name,
         last_name: last_name,
         password: password,
-        password_confirmation: password_confirmation,
-        username: username
+        password_confirmation: password_confirmation
       }
     })
     .set('Accept', 'application/json')
@@ -48,7 +47,7 @@ const WebAPIUtils = {
   },
   login: function(email, password){
     request.post(APIEndpoints.LOGIN)
-    .send({username: email, password: password, grant_type: 'password'})
+    .send({email: email, password: password, grant_type: 'password'})
     .set('Accept', 'application/json')
     .end((error, res)=>{
       if(res){
@@ -117,10 +116,10 @@ const WebAPIUtils = {
         if(res){
           if(res.error){
             _getErrors(res);
-            ServerActionCreators.receiveUser(null, errorMsgs);
+            ServerActionCreators.receiveCurrentUser(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
-            ServerActionCreators.receiveUser(json);
+            ServerActionCreators.receiveCurrentUser(json);
           }
         }
       });

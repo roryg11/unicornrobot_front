@@ -10,12 +10,15 @@ class UserProfileRead extends React.Component {
       bio = <span>{this.props.user.bio}</span>;
       jumpFrom = <span>{this.props.user.jump_from}</span>;
       jumpTo = <span>{this.props.user.jump_to}</span>;
-      userInterests = this.props.user.interests.map(function(interest){
-        return <span key={interest.id}>{interest.description} </span>;
-      });
+      if(this.props.user.interests){
+        userInterests = this.props.user.interests.map(function(interest){
+          return <span key={interest.id}>{interest.description} </span>;
+        });
+      }
     }
 
     return(
+
       <div className="ui card centered">
         <div className="content">
           <div className="header">

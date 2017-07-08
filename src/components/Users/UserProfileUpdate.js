@@ -10,7 +10,7 @@ class UserProfileUpdate extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username: this.props.user.username,
+      username: this.props.user.username || "",
       first_name: this.props.user.first_name,
       last_name: this.props.user.last_name,
       email: this.props.user.email,
@@ -75,15 +75,15 @@ class UserProfileUpdate extends React.Component {
   render (){
     let optionsArr = Object.keys(Interests);
     let optionsList = optionsArr.map(function(key){
-      return <option value={Interests[key]}>{Interests[key]}</option>
+      return <option key={Interests[key]} value={Interests[key]}>{Interests[key]}</option>
     });
 
-    optionsList.unshift(<option value="">Select an interest</option>)
+    optionsList.unshift(<option key="0" value="">Select an interest</option>)
     let currentInterests = this.state.interests.map(function(interest){
       return <p key={interest.id}>{interest.description}</p>;
     });
-    let newInterests = this.state.newInterests.map(function(interest){
-      return <p key={interest.id}>{interest.description}</p>;
+    let newInterests = this.state.newInterests.map(function(interest, index){
+      return <p key={index}>{interest.description}</p>;
     });
 
     return (<div className="ui centered container">

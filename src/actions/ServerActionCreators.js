@@ -35,7 +35,14 @@ const ServerActionCreators = {
   },
   receiveUser: function(json, errors){
     AppDispatcher.handleServerAction({
-      type:ActionTypes.CURRENT_USER_RESPONSE,
+      type:ActionTypes.RECEIVE_USER,
+      json: json,
+      errors: errors
+    });
+  },
+  receiveCurrentUser: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.CURRENT_USER_RESPONSE,
       json: json,
       errors: errors
     });
