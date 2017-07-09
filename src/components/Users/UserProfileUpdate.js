@@ -120,17 +120,24 @@ class UserProfileUpdate extends React.Component {
             <input type="text" name="jump_to" placeholder="What do you want to do?" value={this.state.jump_to} onChange={this._handleInputChange}/>
           </div>
         </div>
-        <div className="fields">
-          <label>What are your interests?</label>
-          {currentInterests}
-          {newInterests}
-          <select value="" onChange={this._handleSelectValueChange}>
-            {optionsList}
-          </select>
-          <button className="ui button" onClick={this._handleSubmitInterestsChange}>Update Interests</button>
-        </div>
         <button className="ui button" onClick={this._handleSubmit}>Submit</button>
       </form>
+
+      <h3 className="ui horizontal divider header">Add your interests</h3>
+      <div className="fields">
+        <label>What are your interests?</label>
+        {currentInterests}
+        {newInterests}
+        <select value="" onChange={this._handleSelectValueChange}>
+          {optionsList}
+        </select>
+        <button className="ui button" onClick={this._handleSubmitInterestsChange}>Update Interests</button>
+      </div>
+
+      <h3 className="ui horizontal divider header">Change Password</h3>
+      <div className="fields">
+        <label>Old Password</label>
+      </div>
     </div>)
   }
 }
