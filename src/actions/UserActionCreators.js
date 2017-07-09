@@ -45,6 +45,15 @@ const UserActionCreators = {
     });
 
     WebAPIUtils.updateUser(id, user);
+  },
+  changePassword: function(id, user){
+    AppDispatcher.handleViewAction({
+      type:ActionTypes.UPDATE_USER_PASSWORD,
+      current_password: user.current_password,
+      new_password: user.new_pasword
+    });
+
+    WebAPIUtils.updateUser(id, user);
   }
 }
 

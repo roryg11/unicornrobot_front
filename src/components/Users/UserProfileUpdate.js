@@ -18,13 +18,17 @@ class UserProfileUpdate extends React.Component {
       jump_from: this.props.user.jump_from || " ",
       jump_to: this.props.user.jump_to || " ",
       interests: this.props.user.interests || [],
-      newInterests: []
+      newInterests: [],
+      old_password: "",
+      password: "",
+      password_confirmation: ""
     }
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleSelectValueChange = this._handleSelectValueChange.bind(this);
     this._handleSubmitInterestsChange = this._handleSubmitInterestsChange.bind(this);
     this._deleteInterest = this._deleteInterest.bind(this);
+    this._submitPasswordChange = this._submitPasswordChange.bind(this);
   }
 
   _handleInputChange(e){
@@ -47,7 +51,7 @@ class UserProfileUpdate extends React.Component {
       jump_from: this.state.jump_from,
       jump_to: this.state.jump_to
     }
-    UserActionCreators.updateUser(this.props.user.id, user, this.state.interests);
+    UserActionCreators.updateUser(this.props.user.id, user);
   }
 
   _handleSelectValueChange(e){
@@ -65,6 +69,16 @@ class UserProfileUpdate extends React.Component {
     for(let i=0; i < this.state.newInterests.length; i ++){
       InterestActionCreators.createInterest(this.state.newInterests[i]);
     }
+  }
+
+  _submitPasswordChange(e){
+    e.preventDefault();
+    const userWithPassword = {
+      email: this.state.email,
+      password: this.state.password,
+      password_confirmation: this.state.password_confirmation
+    };
+    UserActionCreators.changePassword(this.props.user.id, userWithPassword)
   }
 
   _deleteInterest(e){
@@ -134,9 +148,21 @@ class UserProfileUpdate extends React.Component {
         <button className="ui button" onClick={this._handleSubmitInterestsChange}>Update Interests</button>
       </div>
 
-      <h3 className="ui horizontal divider header">Change Password</h3>
-      <div className="fields">
-        <label>Old Password</label>
+      <div className="content ui form">
+        <h3 className="ui horizontal divider header">Change Your Password</h3>
+        <div className="field">
+          <label>Old Password</label>
+          <input type="password" name="old_password" placeholder="Current Password" value={this.state.old_password} onChange={this._handleInputChange}/>
+        </div>
+        <div className="field">
+          <label>New Password</label>
+          <input type="password" name="password" placeholder="New Password" value={this.state.password} onChange={this._handleInputChange}/>
+        </div>
+        <div className="field">
+          <label>Confirm Password</label>
+          <input type="password" name="password_confirmation" placeholder="Confirm Password" value={this.state.password_confirmation} onChange={this._handleInputChange}/>
+        </div>
+        <button className="ui button" onClick={this._submitPasswordChange}>Change Password</button>
       </div>
     </div>)
   }

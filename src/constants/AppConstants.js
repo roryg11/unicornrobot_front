@@ -35,6 +35,7 @@ const AppConstants = {
     RECEIVE_USER: null,
     CREATE_USER: null,
     RECEIVE_CREATED_USER: null,
+    UPDATE_USER_PASSWORD: null,
 
     CREATE_INTEREST: null,
     RECEIVE_INTEREST: null

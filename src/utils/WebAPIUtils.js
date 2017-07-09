@@ -8,6 +8,7 @@ let json;
 
 let _getErrors= function (res){
   let errorMsgs = [];
+  // do some sort of error management here so that the UI doesn't throw errors
   json = JSON.parse(res.text);
   if(json){
     if(json.errors){
@@ -132,6 +133,18 @@ const WebAPIUtils = {
       if(res){
         json = JSON.parse(res.text);
         ServerActionCreators.receiveLogout(json);
+      }
+    });
+  },
+  changePassword: function(id, user){
+    request.put(APIEndpoints.USERS + '/' + id)
+    .send({user: user})
+    .set('Accept', 'application/json')
+    .set('Authorization', sessionStorage.getItem('accessToken'))
+    .end((error, res) => {
+      if(res){
+        json = JSON.parse(res.text);
+        ServerActionCreators.receiveUser(json);
       }
     });
   }
