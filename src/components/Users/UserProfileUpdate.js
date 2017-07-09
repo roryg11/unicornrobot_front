@@ -19,7 +19,6 @@ class UserProfileUpdate extends React.Component {
       jump_to: this.props.user.jump_to || " ",
       interests: this.props.user.interests || [],
       newInterests: [],
-      old_password: "",
       password: "",
       password_confirmation: ""
     }
@@ -150,10 +149,6 @@ class UserProfileUpdate extends React.Component {
 
       <div className="content ui form">
         <h3 className="ui horizontal divider header">Change Your Password</h3>
-        <div className="field">
-          <label>Old Password</label>
-          <input type="password" name="old_password" placeholder="Current Password" value={this.state.old_password} onChange={this._handleInputChange}/>
-        </div>
         <div className="field">
           <label>New Password</label>
           <input type="password" name="password" placeholder="New Password" value={this.state.password} onChange={this._handleInputChange}/>
