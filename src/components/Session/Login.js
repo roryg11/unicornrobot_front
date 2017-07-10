@@ -1,11 +1,14 @@
 import React from 'react';
 import SessionActionCreators from '../../actions/SessionActionCreators';
 import SessionStore from '../../stores/SessionStore';
+import {Redirect} from 'react-router-dom'
+
 
 class Login extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
+      currentUser: undefined,
       username: "",
       email: "",
       password: "",
@@ -31,8 +34,8 @@ class Login extends React.Component {
 
   _onChange(){
     this.setState({
-      errors: SessionStore.getErrors(),
-      
+      errors: [SessionStore.getErrors()],
+      token: SessionStore.getToken()
     });
   }
 
@@ -51,22 +54,26 @@ class Login extends React.Component {
   }
 
   render (){
-    return (
-      <div className="ui container">
-        <h2 className="ui horizontal divider header">Login</h2>
-        <form className="ui form segment">
-          <div className="field">
-            <label>Email</label>
-            <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
-          </div>
-          <div className="field">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange}/>
-          </div>
-          <button className="ui button" onClick={this.handleSubmit}>Submit</button>
-        </form>
-      </div>
-    )
+    if(this.state.token){
+      return (<Redirect to={{pathname: '/home', state: {from: this.props.location} }}/>)
+    } else {
+      return (
+        <div className="ui container">
+          <h2 className="ui horizontal divider header">Login</h2>
+          <form className="ui form segment">
+            <div className="field">
+              <label>Email</label>
+              <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
+            </div>
+            <div className="field">
+              <label>Password</label>
+              <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange}/>
+            </div>
+            <button className="ui button" onClick={this.handleSubmit}>Submit</button>
+          </form>
+        </div>
+      )
+    }
   }
 }
 

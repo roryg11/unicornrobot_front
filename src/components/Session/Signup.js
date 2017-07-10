@@ -1,7 +1,6 @@
 import React from 'react';
 import UserStore from '../../stores/UserStore';
 import UserActionCreators from '../../actions/UserActionCreators';
-// import SessionStore from '../../stores/SessionStore';
 
 class Signup extends React.Component {
   constructor (){

@@ -36,7 +36,6 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.type){
     case ActionTypes.LOGIN_RESPONSE:
-    console.log("in login response");
       if(action.json && action.json.access_token){
         _accessToken = action.json.access_token;
         _email = action.json.email;

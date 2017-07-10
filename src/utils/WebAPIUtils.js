@@ -8,7 +8,7 @@ let json;
 
 let _getErrors= function (res){
   let errorMsgs = [];
-  // do some sort of error management here so that the UI doesn't throw errors
+  // do some sort of error management here so that the UI doesn't throw errors, try catch statement?
   json = JSON.parse(res.text);
   if(json){
     if(json.errors){
