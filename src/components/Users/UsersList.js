@@ -8,7 +8,8 @@ import User from './User';
 
 function getStateFromStores(){
   return {
-    users: UserStore.getAllUsers()
+    users: UserStore.getAllUsers(),
+    errors: []
   };
 }
 
@@ -30,12 +31,14 @@ class UsersList extends React.Component {
 
   _onChange(){
     this.setState({
-      users: UserStore.getAllUsers()
+      users: UserStore.getAllUsers(),
+      errors: UserStore.getErrors()
     });
   }
 
   render (){
     let users = this.state.users;
+    let errorMessages;
     let usersList = users.map(function(user){
       return(
         <tbody className="" key={user.id}>
@@ -44,11 +47,19 @@ class UsersList extends React.Component {
       )
     });
 
+    if(this.state.errors.length){
+          errorMessages = this.state.errors.map(function(errorMsg, index){
+            return(<div className="ui warning message">
+              <span key={index}>{errorMsg} </span>
+            </div>);
+          });
+        }
+
     return (
 
-      <div className="ui centered">
+      <div className="ui centered container">
         <h1>Users List</h1>
-        <button>Add User</button>
+        {errorMessages}
         <table className="ui celled stackable table">
           <thead>
             <tr>

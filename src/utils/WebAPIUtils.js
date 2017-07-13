@@ -8,15 +8,19 @@ let json;
 
 let _getErrors= function (res){
   let errorMsgs = [];
-  // do some sort of error management here so that the UI doesn't throw errors
-  json = JSON.parse(res.text);
-  if(json){
-    if(json.errors){
-      errorMsgs = json.errors;
-    } else if (json.error){
-      errorMsgs = [json.error];
+  if (res.statusCode !== 200){
+    errorMsgs = [res.statusText];
+  } else {
+    json = JSON.parse(res.text);
+    if(json){
+      if(json.errors){
+        errorMsgs = json.errors;
+      } else if (json.error){
+        errorMsgs = [json.error];
+      }
     }
-  }
+  };
+
   return errorMsgs
 }
 
@@ -68,8 +72,13 @@ const WebAPIUtils = {
     .set('Authorization', sessionStorage.getItem('accessToken'))
     .end((error, res)=>{
       if(res){
-        json = JSON.parse(res.text);
-        ServerActionCreators.receiveUsers(json);
+        if(res.error){
+          _getErrors(res);
+          ServerActionCreators.receiveUsers(null, errorMsgs);
+        } else {
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveUsers(json, null);
+        }
       }
     })
   },
