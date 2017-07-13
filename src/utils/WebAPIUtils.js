@@ -3,12 +3,12 @@ import AppConstants from '../constants/AppConstants';
 import request from 'superagent';
 
 const APIEndpoints = AppConstants.APIEndpoints;
-let errorMsgs = ["An error has a occurred. Please try again, or contact your administrator"];
+let errorMsgs;
 let json;
 
 let _getErrors= function (res){
   let errorMsgs = [];
-  if (res.statusCode !== 200){
+  if (res.statusCode === 500){
     errorMsgs = [res.statusText];
   } else {
     json = JSON.parse(res.text);
@@ -57,7 +57,8 @@ const WebAPIUtils = {
     .end((error, res)=>{
       if(res){
         if(res.error){
-          _getErrors(res);
+          console.log(res);
+          errorMsgs = _getErrors(res);
           ServerActionCreators.receiveLogin(null, errorMsgs);
         } else {
           json = JSON.parse(res.text);

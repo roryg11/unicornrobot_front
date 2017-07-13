@@ -15,11 +15,6 @@ class Login extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  getInitialState(){
-    return{
-      errors: []
-    }
-  }
 
   componentDidMount (){
     SessionStore.addChangeListener(this._onChange);
@@ -30,9 +25,10 @@ class Login extends React.Component {
   }
 
   _onChange(){
+    console.log("in the onchange function");
+    console.log(SessionStore.getErrors());
     this.setState({
-      errors: SessionStore.getErrors(),
-      
+      errors: SessionStore.getErrors()
     });
   }
 
@@ -51,9 +47,14 @@ class Login extends React.Component {
   }
 
   render (){
+
+    let errors = this.state.errors.map(function(error, index){
+      return <div class="ui content" key={index}><span className="ui warning message" >{error}</span></div>
+    });
     return (
       <div className="ui container">
         <h2 className="ui horizontal divider header">Login</h2>
+        {errors}
         <form className="ui form segment">
           <div className="field">
             <label>Email</label>
