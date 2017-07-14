@@ -25,8 +25,6 @@ class Login extends React.Component {
   }
 
   _onChange(){
-    console.log("in the onchange function");
-    console.log(SessionStore.getErrors());
     this.setState({
       errors: SessionStore.getErrors()
     });
@@ -49,7 +47,7 @@ class Login extends React.Component {
   render (){
 
     let errors = this.state.errors.map(function(error, index){
-      return <div class="ui content" key={index}><span className="ui warning message" >{error}</span></div>
+      return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
     });
     return (
       <div className="ui container">
