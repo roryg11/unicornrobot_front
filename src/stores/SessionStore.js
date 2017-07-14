@@ -36,6 +36,10 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.type){
     case ActionTypes.LOGIN_RESPONSE:
+<<<<<<< HEAD
+=======
+      console.log(action);
+>>>>>>> d5997860789dd93d2a7d2b88143815876add1e70
       if(action.json && action.json.access_token){
         _accessToken = action.json.access_token;
         _email = action.json.email;
@@ -44,8 +48,8 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
         sessionStorage.setItem('accessToken', _accessToken);
         sessionStorage.setItem('email', _email);
       }
-      if(action.error){
-        _errors = action.error;
+      if(action.errors || action.error){
+        _errors = action.errors || action.error;
       }
       SessionStore.emitChange();
       break;
@@ -53,8 +57,8 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
       if(action.json){
         _currentUser = action.json.user;
       }
-      if(action.error){
-        _errors = action.error
+      if(action.errors || action.error){
+        _errors = action.errors || action.error;
       }
       SessionStore.emitChange();
       break;

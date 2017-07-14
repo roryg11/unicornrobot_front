@@ -35,7 +35,15 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.type){
     case ActionTypes.RECEIVE_USERS:
-      _users = action.json.users;
+      if(action.errors){
+        _errors = action.errors;
+      }
+
+      if(action.json){
+        _users = action.json.users;
+        _errors = [];
+      }
+    
       UserStore.emitChange();
       break;
     case ActionTypes.RECEIVE_CREATED_USER:

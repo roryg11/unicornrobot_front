@@ -3,18 +3,21 @@ import AppConstants from '../constants/AppConstants';
 import request from 'superagent';
 
 const APIEndpoints = AppConstants.APIEndpoints;
-let errorMsgs = ["An error has a occurred. Please try again, or contact your administrator"];
+let errorMsgs;
 let json;
 
 let _getErrors= function (res){
   let errorMsgs = [];
-  // do some sort of error management here so that the UI doesn't throw errors, try catch statement?
-  json = JSON.parse(res.text);
-  if(json){
-    if(json.errors){
-      errorMsgs = json.errors;
-    } else if (json.error){
-      errorMsgs = [json.error];
+  if (res.statusCode === 500){
+    errorMsgs = [res.statusText];
+  } else {
+    json = JSON.parse(res.text);
+    if(json){
+      if(json.errors){
+        errorMsgs = json.errors;
+      } else if (json.error){
+        errorMsgs = [json.error];
+      }
     }
   }
   return errorMsgs
@@ -53,7 +56,8 @@ const WebAPIUtils = {
     .end((error, res)=>{
       if(res){
         if(res.error){
-          _getErrors(res);
+          console.log(res);
+          errorMsgs = _getErrors(res);
           ServerActionCreators.receiveLogin(null, errorMsgs);
         } else {
           json = JSON.parse(res.text);
@@ -68,8 +72,13 @@ const WebAPIUtils = {
     .set('Authorization', sessionStorage.getItem('accessToken'))
     .end((error, res)=>{
       if(res){
-        json = JSON.parse(res.text);
-        ServerActionCreators.receiveUsers(json);
+        if(res.error){
+          _getErrors(res);
+          ServerActionCreators.receiveUsers(null, errorMsgs);
+        } else {
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveUsers(json, null);
+        }
       }
     })
   },

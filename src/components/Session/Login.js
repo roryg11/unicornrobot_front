@@ -18,11 +18,6 @@ class Login extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  getInitialState(){
-    return{
-      errors: []
-    }
-  }
 
   componentDidMount (){
     SessionStore.addChangeListener(this._onChange);
@@ -54,12 +49,16 @@ class Login extends React.Component {
   }
 
   render (){
+    let errors = this.state.errors.map(function(error, index){
+      return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
+    });
     if(this.state.token){
       return (<Redirect to={{pathname: '/home', state: {from: this.props.location} }}/>)
     } else {
       return (
         <div className="ui container">
           <h2 className="ui horizontal divider header">Login</h2>
+          {errors}
           <form className="ui form segment">
             <div className="field">
               <label>Email</label>
