@@ -66,7 +66,7 @@ class Login extends React.Component {
       return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
     });
     if(this.state.token){
-      return (<Redirect to={{pathname: '/profile', state: {from: this.props.location} }}/>)
+      return (<Redirect to={{pathname: '/home', state: {from: this.props.location} }}/>)
     } else {
       return (
         <div className="ui container">
