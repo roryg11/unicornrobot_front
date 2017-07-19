@@ -9,7 +9,8 @@ class Login extends React.Component {
       username: "",
       email: "",
       password: "",
-      errors: []
+      errors: [],
+      success: ""
     };
     this._onChange = this._onChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -25,9 +26,19 @@ class Login extends React.Component {
   }
 
   _onChange(){
-    this.setState({
-      errors: SessionStore.getErrors()
-    });
+    if(this.state.errors.length === 0 && this.state.email){
+      this.setState({
+        success: "Success!",
+        username: "",
+        email: "",
+        password: "",
+        errors: []
+      })
+    } else {
+      this.setState({
+        errors: SessionStore.getErrors()
+      });
+    }
   }
 
   handleInputChange(e){
@@ -49,10 +60,15 @@ class Login extends React.Component {
     let errors = this.state.errors.map(function(error, index){
       return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
     });
+    let successMsg
+    if(this.state.success){
+      successMsg = <div className="ui success message">{this.state.success}</div>;
+    }
     return (
       <div className="ui container">
         <h2 className="ui horizontal divider header">Login</h2>
         {errors}
+        {successMsg}
         <form className="ui form segment">
           <div className="field">
             <label>Email</label>

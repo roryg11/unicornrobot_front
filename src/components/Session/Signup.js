@@ -15,7 +15,8 @@ class Signup extends React.Component {
       bio: "",
       jump_from: "",
       jump_to: "",
-      errors: []
+      errors: [],
+      success: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -34,7 +35,11 @@ class Signup extends React.Component {
 
   _onSignupChange (){
     let errors = UserStore.getErrors();
-    this.setState({errors: errors});
+    if(errors.length){
+      this.setState({errors: errors});
+    } else {
+      this.setState({success: "Successful signup! Please login with the button above."});
+    }
   }
 
   handleInputChange(e){
@@ -64,18 +69,20 @@ class Signup extends React.Component {
 
 
   render (){
-    let errorMessages;
+    let errorMessages, successMessages;
     if(this.state.errors.length){
       errorMessages = this.state.errors.map(function(errorMsg, index){
         return(<div className="ui danger message">
           <span key={index}>{errorMsg} </span>
         </div>);
       });
+    } else if (this.state.success.length && this.state.email){
+      successMessages = <div className="ui success message">{this.state.success}</div>;
     }
     return (
         <div className="ui container content">
           <h3 className="ui horizontal divider header">Sign up with When to Jump</h3>
-
+          {successMessages}
           {errorMessages}
           <form className="ui form segment">
             <div className="fields">
