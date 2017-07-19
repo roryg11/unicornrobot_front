@@ -12,3 +12,5 @@ class UnauthorizedNotice extends React.Component {
     )
   }
 }
+
+export default UnauthorizedNotice;
