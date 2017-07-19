@@ -12,6 +12,7 @@ class Login extends React.Component {
       username: "",
       email: "",
       password: "",
+      token: "",
       errors: [],
       success: ""
     };
@@ -35,7 +36,8 @@ class Login extends React.Component {
         username: "",
         email: "",
         password: "",
-        errors: []
+        errors: [],
+        token: SessionStore.getToken()
       })
     } else {
       this.setState({
@@ -63,32 +65,8 @@ class Login extends React.Component {
     let errors = this.state.errors.map(function(error, index){
       return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
     });
-<<<<<<< HEAD
-    let successMsg
-    if(this.state.success){
-      successMsg = <div className="ui success message">{this.state.success}</div>;
-    }
-    return (
-      <div className="ui container">
-        <h2 className="ui horizontal divider header">Login</h2>
-        {errors}
-        {successMsg}
-        <form className="ui form segment">
-          <div className="field">
-            <label>Email</label>
-            <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
-          </div>
-          <div className="field">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange}/>
-          </div>
-          <button className="ui button" onClick={this.handleSubmit}>Submit</button>
-        </form>
-      </div>
-    )
-=======
     if(this.state.token){
-      return (<Redirect to={{pathname: '/home', state: {from: this.props.location} }}/>)
+      return (<Redirect to={{pathname: '/profile', state: {from: this.props.location} }}/>)
     } else {
       return (
         <div className="ui container">
@@ -108,7 +86,6 @@ class Login extends React.Component {
         </div>
       )
     }
->>>>>>> 843626c2b0ca87c861e4ee0da6a8eca5662343f0
   }
 }
 
