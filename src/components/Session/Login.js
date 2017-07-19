@@ -1,11 +1,14 @@
 import React from 'react';
 import SessionActionCreators from '../../actions/SessionActionCreators';
 import SessionStore from '../../stores/SessionStore';
+import {Redirect} from 'react-router-dom'
+
 
 class Login extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
+      currentUser: undefined,
       username: "",
       email: "",
       password: "",
@@ -36,7 +39,8 @@ class Login extends React.Component {
       })
     } else {
       this.setState({
-        errors: SessionStore.getErrors()
+        errors: SessionStore.getErrors(),
+        token: SessionStore.getToken()
       });
     }
   }
@@ -56,10 +60,10 @@ class Login extends React.Component {
   }
 
   render (){
-
     let errors = this.state.errors.map(function(error, index){
       return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
     });
+<<<<<<< HEAD
     let successMsg
     if(this.state.success){
       successMsg = <div className="ui success message">{this.state.success}</div>;
@@ -82,6 +86,29 @@ class Login extends React.Component {
         </form>
       </div>
     )
+=======
+    if(this.state.token){
+      return (<Redirect to={{pathname: '/home', state: {from: this.props.location} }}/>)
+    } else {
+      return (
+        <div className="ui container">
+          <h2 className="ui horizontal divider header">Login</h2>
+          {errors}
+          <form className="ui form segment">
+            <div className="field">
+              <label>Email</label>
+              <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
+            </div>
+            <div className="field">
+              <label>Password</label>
+              <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange}/>
+            </div>
+            <button className="ui button" onClick={this.handleSubmit}>Submit</button>
+          </form>
+        </div>
+      )
+    }
+>>>>>>> 843626c2b0ca87c861e4ee0da6a8eca5662343f0
   }
 }
 

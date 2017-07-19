@@ -19,8 +19,7 @@ let _getErrors= function (res){
         errorMsgs = [json.error];
       }
     }
-  };
-
+  }
   return errorMsgs
 }
 
