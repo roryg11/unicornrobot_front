@@ -1,6 +1,4 @@
 import React from 'react';
-// import SessionStore from '../../stores/SessionStore';
-// import SessionActionCreators from '../../actions/SessionActionCreators';
 import UserActionCreators from '../../actions/UserActionCreators';
 import Interests from '../../constants/Interests';
 
@@ -52,13 +50,10 @@ class UserProfileUpdate extends React.Component {
   }
 
   _handleSelectValueChange(e){
-    let unsavedInterests = this.state.newInterests;
-    let newInterest = {
-      user_id: this.props.user.id,
-      description: e.target.value
-    };
-    unsavedInterests.push(newInterest);
-    this.setState({newInterests: unsavedInterests});
+    e.preventDefault();
+    let newInterests = this.state.interests;
+    newInterests.push(e.target.value);
+    this.setState({interests: newInterests});
   }
 
   _submitPasswordChange(e){
@@ -78,16 +73,14 @@ class UserProfileUpdate extends React.Component {
 
   render (){
     let optionsArr = Object.keys(Interests);
+    let userInterests = this.state.interests;
     let optionsList = optionsArr.map(function(key){
-      return <option key={Interests[key]} value={Interests[key]}>{Interests[key]}</option>
+        return <option key={Interests[key]} value={Interests[key]}>{Interests[key]}</option>;
     });
 
-    optionsList.unshift(<option key="0" value="">Select an interest</option>)
-    let currentInterests = this.state.interests.map(function(interest, index){
-      return <p key={index}>{interest}</p>;
-    });
-    let newInterests = this.state.newInterests.map(function(interest, index){
-      return <p key={index}>{interest.description}</p>;
+    optionsList.unshift(<option key="0" value="">Select an interest</option>);
+    let currentInterests = userInterests.map(function(interest, index){
+      return <p key={index}>{interest} <span> x</span></p>;
     });
 
     return (<div className="ui centered container">
@@ -123,6 +116,13 @@ class UserProfileUpdate extends React.Component {
             <label>What have you jumped to? Or are looking to jump to?</label>
             <input type="text" name="jump_to" placeholder="What do you want to do?" value={this.state.jump_to} onChange={this._handleInputChange}/>
           </div>
+        </div>
+        <div className="fields">
+          <label>Interests</label>
+          {currentInterests}
+          <select value="" onChange={this._handleSelectValueChange}>
+            {optionsList}
+          </select>
         </div>
         <button className="ui button" onClick={this._handleSubmit}>Submit</button>
       </form>
