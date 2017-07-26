@@ -1,6 +1,6 @@
 import keyMirror from 'keymirror';
 
-const devAPIRoot = "http://localhost:3005";
+// const APIRoot = "http://localhost:3005";
 const APIRoot = "https://guarded-thicket-54472.herokuapp.com/";
 
 const AppConstants = {

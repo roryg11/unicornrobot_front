@@ -10,8 +10,8 @@ class User extends React.Component {
   render (){
     let userInterests = <span>None Listed</span>;
     if(this.props.user.interests.length){
-      userInterests = this.props.user.interests.map(function(interest){
-        return <li key={interest.id}>{interest.description} </li>;
+      userInterests = this.props.user.interests.map(function(interest, index){
+        return <span key={index}>{interest}, </span>;
       });
     }
 
@@ -24,13 +24,10 @@ class User extends React.Component {
               <span>{this.props.user.jump_from}</span> => <span>{this.props.user.jump_to}</span>
             </td>
             <td>
-              <span>Interests:  </span>
-              <ul>
                 {userInterests}
-              </ul>
             </td>
             <td>
-              <span>Contact Me:</span> <span>{this.props.user.email}</span>
+              <span>{this.props.user.email}</span>
             </td>
       </tr>)
   }

@@ -106,18 +106,6 @@ const WebAPIUtils = {
       }
     });
   },
-  createInterest: function(interest){
-    request.post(APIEndpoints.INTEREST)
-    .send({interest: interest})
-    .set('Accept', 'application/json')
-    .set('Authorization', sessionStorage.getItem('accessToken'))
-    .end((error, res) => {
-      if(res){
-        json = JSON.parse(res.text);
-        ServerActionCreators.receiveInterest(json);
-      }
-    });
-  },
   getCurrentUser: function(){
     request.get(APIEndpoints.CURRENT_USER)
       .set('Accept', 'application/json')
