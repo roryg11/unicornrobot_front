@@ -112,7 +112,7 @@ const WebAPIUtils = {
       .end((error, res)=>{
         if(res){
           if(res.error){
-            let errorsMsgs = _getErrors(res);
+            let errorMsgs = _getErrors(res);
             ServerActionCreators.receiveCurrentUser(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
