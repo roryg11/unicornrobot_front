@@ -36,8 +36,14 @@ class UsersList extends React.Component {
 
   render (){
     let users = this.state.users;
+    let apiErrors = this.state.errors;
     let errorMessages;
     let unauthorized;
+    if(apiErrors.length){
+        if(this.state.errors[0] === "unauthorized"){
+          unauthorized = <UnauthorizedNotice/>
+        }
+    }
     let usersList = users.map(function(user){
       return(
         <tbody className="" key={user.id}>
@@ -45,16 +51,6 @@ class UsersList extends React.Component {
         </tbody>
       )
     });
-
-    if(this.state.errors.length){
-        errorMessages = this.state.errors.map(function(errorMsg, index){
-          return(<div className="ui warning message">
-            <span key={index}>{errorMsg} </span>
-          </div>);
-        });
-        unauthorized = <UnauthorizedNotice/>
-      }
-
     return (
 
       <div className="ui centered container">

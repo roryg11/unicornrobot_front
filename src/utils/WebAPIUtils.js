@@ -20,7 +20,7 @@ let _getErrors= function (res){
       }
     }
   }
-  return errorMsgs
+  return errorMsgs;
 }
 
 const WebAPIUtils = {
@@ -56,7 +56,6 @@ const WebAPIUtils = {
     .end((error, res)=>{
       if(res){
         if(res.error){
-          console.log(res);
           errorMsgs = _getErrors(res);
           ServerActionCreators.receiveLogin(null, errorMsgs);
         } else {
@@ -73,7 +72,7 @@ const WebAPIUtils = {
     .end((error, res)=>{
       if(res){
         if(res.error){
-          _getErrors(res);
+          let errorMsgs = _getErrors(res);
           ServerActionCreators.receiveUsers(null, errorMsgs);
         } else {
           json = JSON.parse(res.text);
@@ -113,7 +112,7 @@ const WebAPIUtils = {
       .end((error, res)=>{
         if(res){
           if(res.error){
-            _getErrors(res);
+            let errorsMsgs = _getErrors(res);
             ServerActionCreators.receiveCurrentUser(null, errorMsgs);
           } else {
             json = JSON.parse(res.text);
