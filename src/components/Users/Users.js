@@ -10,8 +10,8 @@ class Users extends React.Component {
       <div>
         <Switch>
           <Route exact path='/users' component={UsersList}/>
-          <Route name="userdetail" path="/users/:userId?" component={UserDetail}/>
           <Route path='/users/profile' component={UserProfile}/>
+          <Route exact name="userdetail" path="/users/:userId" component={UserDetail}/>
         </Switch>
       </div>
     )
