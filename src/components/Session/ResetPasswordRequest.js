@@ -3,7 +3,7 @@ import SessionActionCreators from '../../actions/SessionActionCreators';
 import SessionStore from '../../stores/SessionStore';
 
 
-class ResetPassword extends React.Component {
+class ResetPasswordRequest extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -70,4 +70,4 @@ class ResetPassword extends React.Component {
   }
 }
 
-export default ResetPassword;
+export default ResetPasswordRequest;

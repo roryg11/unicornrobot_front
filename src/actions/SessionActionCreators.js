@@ -36,14 +36,21 @@ const SessionActionCreators = {
     WebAPIUtils.logout();
   },
   resetPasswordRequest: function(email){
-    console.log(email);
     AppDispatcher.handleViewAction({
       type: ActionTypes.RESET_PASSWORD_REQUEST,
       email: email
     });
-    console.log(email);
 
     WebAPIUtils.resetPasswordRequest(email);
+  },
+  changePasswordWithToken: function(password, password_confirmation, password_reset_token){
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.RESET_PASSWORD_WITH_TOKEN_REQUEST,
+      password: password,
+      password_confirmation: password_confirmation,
+      password_reset_token: password_reset_token
+    });
+    WebAPIUtils.changePasswordWithToken(password, password_confirmation, password_reset_token);
   }
 }
 

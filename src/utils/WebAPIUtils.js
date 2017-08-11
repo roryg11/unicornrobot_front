@@ -149,7 +149,7 @@ const WebAPIUtils = {
     .set('Accept', 'application/json')
     .set('Authorization', sessionStorage.getItem('accessToken'))
     .end((error, res) => {
-      if(res.errro){
+      if(res.error){
         let errorMsgs = _getErrors(res);
         ServerActionCreators.receiveCurrentUser(null, errorMsgs);
       } else {
@@ -169,6 +169,23 @@ const WebAPIUtils = {
       } else {
         json = JSON.parse(res.text);
         ServerActionCreators.confirmResetPassword(json);
+      }
+    });
+  },
+  changePasswordWithToken: function(password, password_confirmation, password_reset_token){
+    request.put(APIEndpoints.RESET_PASSWORD + "/" + password_reset_token)
+    .send({
+      password: password,
+      password_confirmation: password_confirmation,
+      password_reset_token: password_reset_token
+    }).set('Accept', 'application/json')
+    .end((error, res) => {
+      if(res.error){
+        let errorMsgs = _getErrors(res);
+        ServerActionCreators.changePasswordWithToken(null, errorMsgs);
+      } else {
+        json = JSON.parse(res.text)
+        ServerActionCreators.changePasswordWithToken(json);
       }
     });
   }

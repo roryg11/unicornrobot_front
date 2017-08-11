@@ -67,6 +67,13 @@ const ServerActionCreators = {
       json: json,
       errors: errors
     });
+  },
+  changePasswordWithToken: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.RESET_PASSWORD_WITH_TOKEN_RESPONSE,
+      json: json,
+      errors: errors
+    });
   }
 };
 

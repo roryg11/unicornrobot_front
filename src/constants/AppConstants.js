@@ -1,7 +1,7 @@
 import keyMirror from 'keymirror';
 
-const APIRoot = "http://localhost:3005";
-// const APIRoot = "https://guarded-thicket-54472.herokuapp.com/";
+// const APIRoot = "http://localhost:3005";
+const APIRoot = "https://guarded-thicket-54472.herokuapp.com/";
 
 const AppConstants = {
   APIEndpoints: {
@@ -29,6 +29,8 @@ const AppConstants = {
     LOGOUT_RESPONSE: null,
     RESET_PASSWORD_REQUEST: null,
     RESET_PASSWORD_RESPONSE: null,
+    CHANGE_PASSWORD_WITH_TOKEN_REQUEST: null,
+    CHANGE_PASSWORD_WITH_TOKEN_RESPONSE: null,
 
     // routes
     REDIRECT: null,

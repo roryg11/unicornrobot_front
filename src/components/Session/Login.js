@@ -76,13 +76,13 @@ class Login extends React.Component {
           <form className="ui form segment">
             <div className="field">
               <label>Email</label>
-              <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this.handleInputChange}/>
+              <input type="text" name="email" placeholder="email" value={this.state.email} onChange={this._handleInputChange}/>
             </div>
             <div className="field">
               <label>Password</label>
-              <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange}/>
+              <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this._handleInputChange}/>
             </div>
-            <button className="ui button" onClick={this.handleSubmit}>Submit</button>
+            <button className="ui button" onClick={this._handleSubmit}>Submit</button>
           </form>
           <Link to="/resetPassword">Forgot Password?</Link>
         </div>

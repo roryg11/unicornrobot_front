@@ -4,7 +4,8 @@ import Home from "./Home";
 import Users from "./Users/Users";
 import Signup from "./Session/Signup";
 import Login from "./Session/Login";
-import ResetPassword from "./Session/ResetPassword";
+import ResetPasswordRequest from "./Session/ResetPasswordRequest";
+import ResetPasswordChange from "./Session/ResetPasswordChange";
 
 class Main extends React.Component {
   render() {
@@ -15,7 +16,8 @@ class Main extends React.Component {
           <Route path = '/users' component={Users}/>
           <Route path = '/signup' component={Signup}/>
           <Route path = '/login' component={Login}/>
-          <Route path = '/resetPassword' component={ResetPassword}/>
+          <Route path = '/resetPassword' component={ResetPasswordRequest}/>
+          <Route path = '/resetPasswordConfirmation/' component={ResetPasswordChange}/>
         </Switch>
       </main>
     );
