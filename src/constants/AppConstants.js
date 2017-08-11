@@ -1,7 +1,7 @@
 import keyMirror from 'keymirror';
 
-// const APIRoot = "http://localhost:3005";
-const APIRoot = "https://guarded-thicket-54472.herokuapp.com/";
+const APIRoot = "http://localhost:3005";
+// const APIRoot = "https://guarded-thicket-54472.herokuapp.com/";
 
 const AppConstants = {
   APIEndpoints: {
@@ -10,7 +10,8 @@ const AppConstants = {
     USERS:        APIRoot + '/v1/users', // might get some issues here
     CURRENT_USER: APIRoot + '/v1/users/current_user',
     LOGOUT:       APIRoot + '/v1/logout',
-    INTEREST:    APIRoot + '/v1/interests'
+    INTEREST:    APIRoot + '/v1/interests',
+    RESET_PASSWORD: APIRoot + '/v1/password_resets'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -26,6 +27,8 @@ const AppConstants = {
     CURRENT_USER_REQUEST: null,
     LOGOUT_REQUEST: null,
     LOGOUT_RESPONSE: null,
+    RESET_PASSWORD_REQUEST: null,
+    RESET_PASSWORD_RESPONSE: null,
 
     // routes
     REDIRECT: null,
@@ -37,6 +40,8 @@ const AppConstants = {
     CREATE_USER: null,
     RECEIVE_CREATED_USER: null,
     UPDATE_USER_PASSWORD: null,
+    DELETE_USER_REQUEST: null,
+    CONFIRM_USER_DELETION: null,
 
     CREATE_INTEREST: null,
     RECEIVE_INTEREST: null

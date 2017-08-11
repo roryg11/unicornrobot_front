@@ -43,15 +43,18 @@ class UserProfile extends React.Component {
 
     render (){
       let profile;
+      let editButton;
       if( this.state.showEditForm ){
-        profile= <UserProfileUpdate user={this.state.user}/>
+        profile = <UserProfileUpdate user={this.state.user}/>;
+        editButton = <p>Editing...</p>
       } else {
         profile = <UserProfileRead user={this.state.user}/>
+        editButton = <button className="ui button" onClick={this._toggleEdit}>Edit</button>;
       }
       return(
         <div>
-          <div>User Profile Page</div>
-          <button className="ui button" onClick={this._toggleEdit}>Edit</button>
+          <h1 className="ui header horizontal divider">Your Profile</h1>
+          {editButton}
           {profile}
         </div>
       );

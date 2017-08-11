@@ -34,6 +34,16 @@ const SessionActionCreators = {
       type: ActionTypes.LOGOUT
     });
     WebAPIUtils.logout();
+  },
+  resetPasswordRequest: function(email){
+    console.log(email);
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.RESET_PASSWORD_REQUEST,
+      email: email
+    });
+    console.log(email);
+
+    WebAPIUtils.resetPasswordRequest(email);
   }
 }
 

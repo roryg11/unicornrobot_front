@@ -10,6 +10,7 @@ let _email = sessionStorage.getItem('email');
 let _accessToken = sessionStorage.getItem('accessToken');
 let _errors = [];
 let _currentUser;
+let _resetPasswordLinkSent = false;
 
 let SessionStore = assign({}, EventEmitter.prototype, {
   emitChange: function(){
@@ -29,6 +30,9 @@ let SessionStore = assign({}, EventEmitter.prototype, {
   },
   getCurrentUser: function(){
     return _currentUser;
+  },
+  getResetPasswordStatus: function(){
+    return _resetPasswordLinkSent;
   }
 });
 
@@ -66,7 +70,15 @@ SessionStore.dispatchToken = AppDispatcher.register(function(payload){
       sessionStorage.removeItem('email');
       SessionStore.emitChange();
       break;
+    case ActionTypes.RESET_PASSWORD_RESPONSE:
+      if(action.json){
+        _resetPasswordLinkSent = action.json;
+      } else {
+        _resetPasswordLinkSent = false;
+      }
+      break;
     default:
+
       break;
   }
   return true;

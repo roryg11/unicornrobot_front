@@ -22,7 +22,7 @@ class UserProfileUpdate extends React.Component {
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleSelectValueChange = this._handleSelectValueChange.bind(this);
-    this._deleteInterest = this._deleteInterest.bind(this);
+    this._deleteAccount = this._deleteAccount.bind(this);
     this._submitPasswordChange = this._submitPasswordChange.bind(this);
   }
 
@@ -66,7 +66,7 @@ class UserProfileUpdate extends React.Component {
     UserActionCreators.changePassword(this.props.user.id, userWithPassword)
   }
 
-  _deleteInterest(e){
+  _deleteAccount(e){
     e.preventDefault();
     return;
   }
@@ -84,7 +84,7 @@ class UserProfileUpdate extends React.Component {
     });
 
     return (<div className="ui centered container">
-      <form className="ui form">
+      <form className="segment ui form">
         <div className="fields">
           <div className="field">
             <label>Username</label>
@@ -127,7 +127,7 @@ class UserProfileUpdate extends React.Component {
         <button className="ui button" onClick={this._handleSubmit}>Submit</button>
       </form>
 
-      <div className="content ui form">
+      <div className="segment content ui form">
         <h3 className="ui horizontal divider header">Change Your Password</h3>
         <div className="field">
           <label>New Password</label>
@@ -139,6 +139,13 @@ class UserProfileUpdate extends React.Component {
         </div>
         <button className="ui button" onClick={this._submitPasswordChange}>Change Password</button>
       </div>
+
+      <div className="segment content ui form">
+        <h3 className="ui horizontal divider header">Delete Account</h3>
+        <p>Are you sure you want to delete your account? You cannot undo this action</p>
+        <button className="ui warning button" onClick={this._deleteAccount}>Yes, delete my account</button>
+      </div>
+
     </div>)
   }
 }

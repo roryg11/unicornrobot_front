@@ -143,6 +143,34 @@ const WebAPIUtils = {
         ServerActionCreators.receiveUser(json);
       }
     });
+  },
+  deleteUser: function(id){
+    request.delete(APIEndpoints.USERS + "/" + id)
+    .set('Accept', 'application/json')
+    .set('Authorization', sessionStorage.getItem('accessToken'))
+    .end((error, res) => {
+      if(res.errro){
+        let errorMsgs = _getErrors(res);
+        ServerActionCreators.receiveCurrentUser(null, errorMsgs);
+      } else {
+        json = JSON.parse(res.text);
+        ServerActionCreators.confirmDeletion(json);
+      }
+    })
+  },
+  resetPasswordRequest: function(email){
+    request.post(APIEndpoints.RESET_PASSWORD)
+    .send({email: email})
+    .set('Accept', 'application/json')
+    .end((error, res) => {
+      if(res.error){
+        let errorMsgs = _getErrors(res);
+        ServerActionCreators.confirmResetPassword(null, errorMsgs);
+      } else {
+        json = JSON.parse(res.text);
+        ServerActionCreators.confirmResetPassword(json);
+      }
+    });
   }
 }
 

@@ -53,6 +53,20 @@ const ServerActionCreators = {
       json: json,
       errors: errors
     });
+  },
+  confirmDeletion: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.CONFIRM_USER_DELETION,
+      json: json,
+      errors: errors
+    })
+  },
+  confirmResetPassword: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.RESET_PASSWORD_RESPONSE,
+      json: json,
+      errors: errors
+    });
   }
 };
 

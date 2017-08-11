@@ -1,7 +1,8 @@
 import React from 'react';
 import SessionActionCreators from '../../actions/SessionActionCreators';
 import SessionStore from '../../stores/SessionStore';
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom';
+
 
 
 class Login extends React.Component {
@@ -17,8 +18,8 @@ class Login extends React.Component {
       success: ""
     };
     this._onChange = this._onChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this._handleInputChange = this._handleInputChange.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   componentDidMount (){
@@ -47,7 +48,7 @@ class Login extends React.Component {
     }
   }
 
-  handleInputChange(e){
+  _handleInputChange(e){
     const target = e.target;
     const value = target.value;
     const name = target.name;
@@ -56,7 +57,7 @@ class Login extends React.Component {
     });
   }
 
-  handleSubmit (e){
+  _handleSubmit (e){
     e.preventDefault();
     SessionActionCreators.login(this.state.email, this.state.password);
   }
@@ -83,6 +84,7 @@ class Login extends React.Component {
             </div>
             <button className="ui button" onClick={this.handleSubmit}>Submit</button>
           </form>
+          <Link to="/resetPassword">Forgot Password?</Link>
         </div>
       )
     }
