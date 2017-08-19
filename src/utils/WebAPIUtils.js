@@ -188,6 +188,18 @@ const WebAPIUtils = {
         ServerActionCreators.changePasswordWithToken(json);
       }
     });
+  },
+  getRSSFeed: function(){
+    request.get(APIEndpoints.RSS_FEED)
+    .end((err, res) => {
+      if(res.error || res.errors){
+        let errors = _getErrors(res);
+        ServerActionCreators.receiveRSSFeed(null, errors);
+      } else {
+        let apiStream = JSON.parse(res.text);
+        ServerActionCreators.receiveRSSFeed(apiStream.apis);
+      }
+    })
   }
 }
 

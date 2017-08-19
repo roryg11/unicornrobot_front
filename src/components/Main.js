@@ -6,6 +6,7 @@ import Signup from "./Session/Signup";
 import Login from "./Session/Login";
 import ResetPasswordRequest from "./Session/ResetPasswordRequest";
 import ResetPasswordChange from "./Session/ResetPasswordChange";
+import BlogFeed from './Blog/BlogFeed';
 
 class Main extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class Main extends React.Component {
           <Route path = '/login' component={Login}/>
           <Route path = '/resetPassword' component={ResetPasswordRequest}/>
           <Route path = '/resetPasswordConfirmation/' component={ResetPasswordChange}/>
+          <Route path = '/blog' component={BlogFeed}/>
         </Switch>
       </main>
     );

@@ -74,6 +74,13 @@ const ServerActionCreators = {
       json: json,
       errors: errors
     });
+  },
+  receiveRSSFeed: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.RSS_FEED_RESPONSE,
+      json: json,
+      errors: errors
+    });
   }
 };
 

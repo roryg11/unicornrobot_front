@@ -11,7 +11,8 @@ const AppConstants = {
     CURRENT_USER: APIRoot + '/v1/users/current_user',
     LOGOUT:       APIRoot + '/v1/logout',
     INTEREST:    APIRoot + '/v1/interests',
-    RESET_PASSWORD: APIRoot + '/v1/password_resets'
+    RESET_PASSWORD: APIRoot + '/v1/password_resets',
+    RSS_FEED: APIRoot + '/v1/blog'
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -35,6 +36,7 @@ const AppConstants = {
     // routes
     REDIRECT: null,
 
+    //  users
     LOAD_USERS: null,
     RECEIVE_USERS: null,
     LOAD_USER: null,
@@ -46,7 +48,11 @@ const AppConstants = {
     CONFIRM_USER_DELETION: null,
 
     CREATE_INTEREST: null,
-    RECEIVE_INTEREST: null
+    RECEIVE_INTEREST: null,
+
+    // Blog
+    RSS_FEED_REQUEST: null,
+    RSS_FEED_RESPONSE: null
   })
 }
 
