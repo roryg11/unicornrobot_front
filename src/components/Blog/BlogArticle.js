@@ -15,9 +15,14 @@ class BlogArticle extends React.Component {
   }
 
   render (){
+    let paragraphs = this.props.article.parsed_content.map(function(paragraph, index){
+      return <p key={index}>{paragraph}</p>
+    });
     return (
-      <div className="ui container content">
-        <h3>{this.props.article.title}</h3>
+      <div className="ui vertical segment">
+        <h3 className="ui horizontal divider">{this.props.article.title}</h3>
+        <p>{this.props.article.publish_date}</p>
+        {paragraphs}
       </div>
     )
   }
