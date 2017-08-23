@@ -29,10 +29,12 @@ class ResetPasswordChange extends React.Component {
   _onChange(){
     if(this.state.errors.length === 0 && this.state.email){
       this.setState({
+        errors: [],
         success: "Success! Password Change",
       })
     } else {
       this.setState({
+        success: "",
         errors: SessionStore.getErrors()
       });
     }
@@ -53,12 +55,16 @@ class ResetPasswordChange extends React.Component {
   }
 
   render (){
-    let errors = this.state.errors.map(function(error, index){
-      return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
-    });
+    let errors;
+    if(this.state.errors.length){
+      errors = this.state.errors.map(function(error, index){
+        return <div className="ui content" key={index}><span className="ui warning message" >{error}</span></div>
+      });
+    }
 
     return (
       <div className="ui container">
+      {errors}
         <h2 className="ui horizontal divider header">Change Password</h2>
         <form>
         <div className="segment content ui form">

@@ -31,8 +31,6 @@ BlogStore.dispatchToken = AppDispatcher.register(function(payload){
   const action = payload.action;
   switch(action.type){
     case ActionTypes.RSS_FEED_RESPONSE:
-    console.log("IN THE RSS FEED RESPONSE");
-    console.log(action);
       if(action.json){
         _feed = action.json;
       }

@@ -7,7 +7,7 @@ import BlogArticle from './BlogArticle';
 function getStateFromStores(){
   return {
     feed: BlogStore.getFeed(),
-    errors: []
+    errors: BlogStore.getErrors()
   }
 }
 
@@ -31,7 +31,8 @@ class BlogFeed extends React.Component {
   }
 
   _onChange(){
-    this.setState({errors: BlogStore.getErrors(), feed: BlogStore.getFeed()});
+    this.setState(getStateFromStores());
+
   }
 
   render (){
