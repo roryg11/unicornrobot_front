@@ -37,7 +37,7 @@ class Signup extends React.Component {
     if(errors.length){
       this.setState({errors: errors});
     } else {
-      this.setState({success: "Successful signup! Please login with the button above."});
+      this.setState({success: "Successful signup! Please check your email for a message to confirm your account"});
     }
   }
 

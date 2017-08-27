@@ -200,6 +200,18 @@ const WebAPIUtils = {
         ServerActionCreators.receiveRSSFeed(apiStream.apis);
       }
     })
+  },
+  confirmEmail: function(token){
+    request.post(APIEndpoints.CONFIRM_EMAIL + "/" + token)
+    .end((err, res) => {
+      if(res.error || res.errors){
+        let errors = _getErrors(res)
+        ServerActionCreators.receiveEmailConfirmation(null, errors)
+      } else {
+        let activationStatus = JSON.parse(res.text)
+        ServerActionCreators.receiveEmailConfirmation(activationStatus)
+      }
+    })
   }
 }
 

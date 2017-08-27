@@ -9,6 +9,7 @@ const CHANGE_EVENT = 'change';
 let _users = [];
 let _errors = [];
 let _user = {email: ""};
+let _activated = false;
 
 let UserStore = assign({}, EventEmitter.prototype, {
   emitChange: function(){
@@ -28,6 +29,9 @@ let UserStore = assign({}, EventEmitter.prototype, {
   },
   getErrors: function(){
     return _errors;
+  },
+  getActivation: function(){
+    return _activated;
   }
 });
 
@@ -43,7 +47,7 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload){
         _users = action.json.users;
         _errors = [];
       }
-    
+
       UserStore.emitChange();
       break;
     case ActionTypes.RECEIVE_CREATED_USER:
@@ -68,6 +72,16 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload){
       }
 
       UserStore.emitChange();
+      break;
+      case ActionTypes.CONFIRM_EMAIL_REQUEST:
+      if(action.json){
+        _activated  = action.json.activated;
+        _errors = []
+      }
+
+      if(action.errors){
+        _errors = action.errors;
+      }
       break;
     default:
       return true;

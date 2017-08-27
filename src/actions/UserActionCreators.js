@@ -54,6 +54,14 @@ const UserActionCreators = {
     });
 
     WebAPIUtils.updateUser(id, user);
+  },
+  confirmEmail: function(token){
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.CONFIRM_EMAIL_REQUEST,
+      token: token
+    });
+
+    WebAPIUtils.confirmEmail(token);
   }
 }
 

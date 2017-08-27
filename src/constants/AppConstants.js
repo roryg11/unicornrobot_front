@@ -12,7 +12,8 @@ const AppConstants = {
     LOGOUT:       APIRoot + '/v1/logout',
     INTEREST:    APIRoot + '/v1/interests',
     RESET_PASSWORD: APIRoot + '/v1/password_resets',
-    RSS_FEED: APIRoot + '/v1/blog'
+    RSS_FEED: APIRoot + '/v1/blog',
+    CONFIRM_EMAIL: APIRoot + "/v1/confirmation_email"
   },
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
@@ -24,6 +25,8 @@ const AppConstants = {
     LOGIN_RESPONSE: null,
     SIGNUP_REQUEST: null,
     SIGNUP_RESPONSE: null,
+    CONFIRM_EMAIL_REQUEST: null,
+    CONFIRM_EMAIL_RESPONSE: null,
     CURRENT_USER_RESPONSE: null,
     CURRENT_USER_REQUEST: null,
     LOGOUT_REQUEST: null,

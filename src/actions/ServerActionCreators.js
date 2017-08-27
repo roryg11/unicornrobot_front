@@ -81,6 +81,13 @@ const ServerActionCreators = {
       json: json,
       errors: errors
     });
+  },
+  receiveEmailConfirmation: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.CONFIRM_EMAIL_RESPONSE,
+      json: json,
+      errors: errors
+    });
   }
 };
 

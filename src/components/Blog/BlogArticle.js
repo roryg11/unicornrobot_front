@@ -1,10 +1,6 @@
 import React from 'react';
 
 class BlogArticle extends React.Component {
-  constructor (props){
-    super(props);
-  }
-
   render (){
     let paragraphs = this.props.article.parsed_content.map(function(paragraph, index){
       return <p key={index}>{paragraph}</p>

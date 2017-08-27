@@ -39,7 +39,7 @@ class Login extends React.Component {
         password: "",
         errors: [],
         token: SessionStore.getToken()
-      })
+      });
     } else {
       this.setState({
         errors: SessionStore.getErrors(),
