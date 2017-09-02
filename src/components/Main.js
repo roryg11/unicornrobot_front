@@ -8,6 +8,7 @@ import ResetPasswordRequest from "./Session/ResetPasswordRequest";
 import ResetPasswordChange from "./Session/ResetPasswordChange";
 import BlogFeed from './Blog/BlogFeed';
 import ConfirmEmail from './Users/ConfirmEmail'
+import Events from './Events/Events';
 
 class Main extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class Main extends React.Component {
           <Route path = '/resetPasswordConfirmation/' component={ResetPasswordChange}/>
           <Route path = '/confirmEmail/' component={ConfirmEmail}/>
           <Route path = '/blog' component={BlogFeed}/>
+          <Route path = '/events' component={Events}/>
         </Switch>
       </main>
     );

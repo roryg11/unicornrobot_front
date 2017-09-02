@@ -10,6 +10,7 @@ class ConfirmEmail extends React.Component {
     this.state = {
       activated: false,
       token: location[location.length -1],
+      errors: []
     }
 
     this._onChange = this._onChange.bind(this);
@@ -21,14 +22,20 @@ class ConfirmEmail extends React.Component {
   }
 
   _onChange (){
-    this.setState({activated: UserStore.getActivation()});
+    this.setState({activated: UserStore.getActivation(), erorrs: UserStore.getErrors()});
   }
   render (){
     let message;
+    let errorMsgs;
     if(this.state.activated){
       message = <div><span className="ui success message">Your account has been successfully activated, please click to login</span></div>
-    } else{
-      message = <div><span className="ui warning message">There was an error verifying your email</span></div>
+    } else if (this.state.errors.length){
+      errorMsgs = this.state.errors.map(function(err){
+        return <li>{err}</li>;
+      })
+      message = <div><span className="ui warning message"><ul> {errorMsgs} </ul></span></div>
+    } else {
+      message = <div><span className="ui warning message">Could not process the request</span></div>
     }
     return (
       <div className="ui container">

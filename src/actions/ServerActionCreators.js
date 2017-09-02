@@ -88,6 +88,13 @@ const ServerActionCreators = {
       json: json,
       errors: errors
     });
+  },
+  receiveEvents: function(json, errors){
+    AppDispatcher.handleServerAction({
+      type: ActionTypes.EVENTS_RESPONSE,
+      json: json,
+      errors: errors
+    });
   }
 };
 

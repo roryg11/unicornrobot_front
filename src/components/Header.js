@@ -52,7 +52,7 @@ class Header extends React.Component {
     return (
       <div className="ui stackable secondary pointing menu">
         <Link to="/users" className="item">User Directory</Link>
-        <a className="item">Events</a>
+        <Link to="/events" className="item">Events</Link>
         <Link to="/blog" className="item">Blog</Link>
         {rightMenu}
       </div>

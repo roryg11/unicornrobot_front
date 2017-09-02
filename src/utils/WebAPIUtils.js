@@ -204,14 +204,29 @@ const WebAPIUtils = {
   confirmEmail: function(token){
     request.post(APIEndpoints.CONFIRM_EMAIL + "/" + token)
     .end((err, res) => {
-      if(res.error || res.errors){
+      if(err){
+        let errors = [err];
+        ServerActionCreators.receiveEmailConfirmation(null, errors);
+      } else if(res.error || res.errors){
         let errors = _getErrors(res)
-        ServerActionCreators.receiveEmailConfirmation(null, errors)
+        ServerActionCreators.receiveEmailConfirmation(null, errors);
       } else {
-        let activationStatus = JSON.parse(res.text)
-        ServerActionCreators.receiveEmailConfirmation(activationStatus)
+        let activationStatus = JSON.parse(res.text);
+        ServerActionCreators.receiveEmailConfirmation(activationStatus);
       }
     })
+  },
+  getEvents: function(){
+    request.get(APIEndpoints.EVENTS)
+    .end((err, res) => {
+      if(err){
+        let errors = [err];
+        ServerActionCreators.receiveEvents(null, errors);
+      } else {
+        let eventBriteResponse = JSON.parse(res.text);
+        ServerActionCreators.receiveEvents(eventBriteResponse.events);
+      }
+    });
   }
 }
 
