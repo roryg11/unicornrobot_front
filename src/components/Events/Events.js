@@ -25,14 +25,13 @@ class Events extends React.Component {
 
   _onChange (){
     this.setState({
-      events: EventStore.getEvents(),
+      events: EventStore.getEvents().reverse(),
       errors: EventStore.getErrors()
     });
   }
 
   render (){
     let events = this.state.events, eventItems;
-    console.log(events.length);
     if(events){
       eventItems = events.map(function(event, index){
         return (<EventItem key={index} event={event}/>);
@@ -41,7 +40,9 @@ class Events extends React.Component {
 
     return <div>
       <h1>When To Jump Events in Your Area</h1>
-      {eventItems}
+      <div className="ui container">
+        {eventItems}
+      </div>
     </div>
   }
 }

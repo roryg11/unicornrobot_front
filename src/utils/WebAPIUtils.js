@@ -224,7 +224,7 @@ const WebAPIUtils = {
         ServerActionCreators.receiveEvents(null, errors);
       } else {
         let eventBriteResponse = JSON.parse(res.text);
-        ServerActionCreators.receiveEvents(eventBriteResponse.events);
+        ServerActionCreators.receiveEvents(eventBriteResponse.apis);
       }
     });
   }
