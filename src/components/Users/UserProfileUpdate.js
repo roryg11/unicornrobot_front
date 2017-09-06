@@ -44,7 +44,8 @@ class UserProfileUpdate extends React.Component {
       last_name: this.state.last_name,
       bio: this.state.bio,
       jump_from: this.state.jump_from,
-      jump_to: this.state.jump_to
+      jump_to: this.state.jump_to,
+      interests: this.state.interests
     }
     UserActionCreators.updateUser(this.props.user.id, user);
   }
